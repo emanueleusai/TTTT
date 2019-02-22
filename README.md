@@ -5,5 +5,5 @@ Step2 for 4 tops analysis to add MVA variables on top of step1 ntuples.
   
 
 2. to run step2
-    cd step2
-    ./submitstep2.sh
+  *  cd step2
+  *  ./submitstep2.sh
