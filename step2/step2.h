@@ -143,6 +143,7 @@ public :
    Float_t         aveCSVpt;
    Float_t         mass_maxJJJpt;
    Float_t         lepDR_minBBdr;
+   Float_t         HT_bjets;
    
 
    // List of branches
