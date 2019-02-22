@@ -27,7 +27,7 @@ os.system('mkdir -p '+condorDir)
 
 for file in rootfiles:
     if 'root' not in file: continue
-#     if 'TTTT' not in file: continue
+    if 'TTTT' not in file: continue
     rawname = file[:-6]
     count+=1
     dict={'RUNDIR':runDir, 'CONDORDIR':condorDir, 'INPUTDIR':inputDir, 'FILENAME':rawname, 'CMSSWBASE':relbase, 'OUTPUTDIR':outputDir}

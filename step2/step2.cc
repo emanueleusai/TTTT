@@ -56,8 +56,9 @@ void step2::Loop()
    outputTree->Branch("aveCSVpt",&aveCSVpt,"aveCSVpt/F");
    outputTree->Branch("mass_maxJJJpt",&mass_maxJJJpt,"mass_maxJJJpt/F");
    outputTree->Branch("lepDR_minBBdr",&lepDR_minBBdr,"lepDR_minBBdr/F");  
-
    outputTree->Branch("HT_bjets",&HT_bjets,"HT_bjets/F");     
+   outputTree->Branch("HT_ratio",&HT_ratio,"HT_ratio/F");        
+   outputTree->Branch("HT_2m",&HT_2m,"HT_2m/F");        
       
    Long64_t nentries = inputTree->GetEntriesFast();
    Long64_t nbytes = 0, nb = 0;
@@ -85,32 +86,32 @@ void step2::Loop()
      mass_maxJJJpt = -1;      
      FW_momentum_2=0;      
      centrality = -1;      
-
+     HT_bjets = 0;
+     HT_ratio = 0; //for ratio of HT(j1,2,3,4)/HT(other jets)     
+     HT_2m = 0;
+      
      int njetscsv = 0;      
      double maxBBdeta = 0;
      double totalJetPt = 0; //this is mainly HT
      double totalJetE  = 0; 
-     double HT_bjets = 0; //HT of b jets
 
-     double HT_ratio = 0; //for ratio of HT(j1,2,3,4)/HT(other jets)
      double HT_4jets = 0; //for ratio of HT(j1,2,3,4)/HT(other jets)     
-     double HT_other = 0; //for ratio of HT(j1,2,3,4)/HT(other jets)     
-     
-     double HT_2m = 0;
-     
+     double HT_other = 0; //for ratio of HT(j1,2,3,4)/HT(other jets)          
      double npairs = 0;     
      double maxJJJpt = 0;
-//////////////////////////////////////////
-// build BB PAIR variables, aveCSVpt, HT_bjets //
-//////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+// build BB PAIR variables, aveCSVpt, HT_bjets, HT_ratio, HT_2m//
+/////////////////////////////////////////////////////////////////
 
      HT_4jets = theJetCSVb_JetSubCalc_PtOrdered->at(0)+theJetCSVb_JetSubCalc_PtOrdered->at(1)+theJetCSVb_JetSubCalc_PtOrdered->at(2)+theJetCSVb_JetSubCalc_PtOrdered->at(3);
      for(unsigned int ijet = 4; ijet < theJetPt_JetSubCalc_PtOrdered->size(); ijet++){
          HT_other += theJetCSVb_JetSubCalc_PtOrdered->at(ijet);
-     } 
-     HT_ratio = HT_4jets/HT_4jets;
+     }
+     if (NJets_JetSubCalc > 4){
+         HT_ratio = HT_4jets/HT_other;
+//          std::cout<<"HT_ratio : "<<HT_ratio<<std::endl;
+     }
      HT_2m = AK4HT - (theJetCSVb_JetSubCalc_PtOrdered->at(0)+theJetCSVb_JetSubCalc_PtOrdered->at(1));
-     
      
      for(unsigned int ijet = 0; ijet < theJetPt_JetSubCalc_PtOrdered->size(); ijet++){
 		if(njetscsv<=10 && theJetCSVb_JetSubCalc_PtOrdered->at(ijet)>=0 && theJetCSVbb_JetSubCalc_PtOrdered->at(ijet)>=0){
@@ -123,7 +124,7 @@ void step2::Loop()
 		bjet1.SetPtEtaPhiE(theJetPt_JetSubCalc_PtOrdered->at(ijet),theJetEta_JetSubCalc_PtOrdered->at(ijet),theJetPhi_JetSubCalc_PtOrdered->at(ijet),theJetEnergy_JetSubCalc_PtOrdered->at(ijet));	
 
 		HT_bjets+=theJetPt_JetSubCalc_PtOrdered->at(ijet);
-		
+        
 		for(unsigned int jjet = ijet + 1; jjet < theJetPt_JetSubCalc_PtOrdered->size(); jjet++){
 		  if(jjet >= theJetPt_JetSubCalc_PtOrdered->size()) continue;
 		  if(!(theJetCSVb_JetSubCalc_PtOrdered->at(ijet)+theJetCSVbb_JetSubCalc_PtOrdered->at(ijet) > 0.4941)) continue; //without b-tag SFs	  
@@ -189,5 +190,6 @@ void step2::Loop()
 	  }
    outputTree->Fill();      
    }
+std::cout<<"DONE "<<nentries<<std::endl;   
 outputTree->Write();   
 }

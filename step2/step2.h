@@ -144,8 +144,9 @@ public :
    Float_t         mass_maxJJJpt;
    Float_t         lepDR_minBBdr;
    Float_t         HT_bjets;
+   Float_t         HT_ratio;        
+   Float_t         HT_2m;        
    
-
    // List of branches
    TBranch        *b_event_CommonCalc;   //!
    TBranch        *b_run_CommonCalc;   //!
