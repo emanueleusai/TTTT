@@ -99,19 +99,20 @@ void step2::Loop()
      double HT_other = 0; //for ratio of HT(j1,2,3,4)/HT(other jets)          
      double npairs = 0;     
      double maxJJJpt = 0;
+     double BjetSecondPt = 0;
+
 /////////////////////////////////////////////////////////////////
 // build BB PAIR variables, aveCSVpt, HT_bjets, HT_ratio, HT_2m//
 /////////////////////////////////////////////////////////////////
 
-     HT_4jets = theJetCSVb_JetSubCalc_PtOrdered->at(0)+theJetCSVb_JetSubCalc_PtOrdered->at(1)+theJetCSVb_JetSubCalc_PtOrdered->at(2)+theJetCSVb_JetSubCalc_PtOrdered->at(3);
+     HT_4jets = theJetPt_JetSubCalc_PtOrdered->at(0)+theJetPt_JetSubCalc_PtOrdered->at(1)+theJetPt_JetSubCalc_PtOrdered->at(2)+theJetPt_JetSubCalc_PtOrdered->at(3);
      for(unsigned int ijet = 4; ijet < theJetPt_JetSubCalc_PtOrdered->size(); ijet++){
-         HT_other += theJetCSVb_JetSubCalc_PtOrdered->at(ijet);
+         HT_other += theJetPt_JetSubCalc_PtOrdered->at(ijet);
      }
      if (NJets_JetSubCalc > 4){
          HT_ratio = HT_4jets/HT_other;
-//          std::cout<<"HT_ratio : "<<HT_ratio<<std::endl;
      }
-     HT_2m = AK4HT - (theJetCSVb_JetSubCalc_PtOrdered->at(0)+theJetCSVb_JetSubCalc_PtOrdered->at(1));
+
      
      for(unsigned int ijet = 0; ijet < theJetPt_JetSubCalc_PtOrdered->size(); ijet++){
 		if(njetscsv<=10 && theJetCSVb_JetSubCalc_PtOrdered->at(ijet)>=0 && theJetCSVbb_JetSubCalc_PtOrdered->at(ijet)>=0){
@@ -120,11 +121,15 @@ void step2::Loop()
 		}
 		totalJetPt+=theJetPt_JetSubCalc_PtOrdered->at(ijet);
 		totalJetE+=theJetEnergy_JetSubCalc_PtOrdered->at(ijet);		
+		
 		if(!(theJetCSVb_JetSubCalc_PtOrdered->at(ijet)+theJetCSVbb_JetSubCalc_PtOrdered->at(ijet) > 0.4941)) continue; //without b-tag SFs
+		
 		bjet1.SetPtEtaPhiE(theJetPt_JetSubCalc_PtOrdered->at(ijet),theJetEta_JetSubCalc_PtOrdered->at(ijet),theJetPhi_JetSubCalc_PtOrdered->at(ijet),theJetEnergy_JetSubCalc_PtOrdered->at(ijet));	
-
 		HT_bjets+=theJetPt_JetSubCalc_PtOrdered->at(ijet);
-        
+		if (theJetPt_JetSubCalc_PtOrdered->at(ijet) < BJetLeadPt-0.001 && theJetPt_JetSubCalc_PtOrdered->at(ijet) >= BjetSecondPt) BjetSecondPt = theJetPt_JetSubCalc_PtOrdered->at(ijet);
+		//different float precision between theJetPt_JetSubCalc_PtOrdered->at(ijet) and BJetLeadPt
+		//require at least 0.001 between them to avoid double counting the leading bjet pt
+		        
 		for(unsigned int jjet = ijet + 1; jjet < theJetPt_JetSubCalc_PtOrdered->size(); jjet++){
 		  if(jjet >= theJetPt_JetSubCalc_PtOrdered->size()) continue;
 		  if(!(theJetCSVb_JetSubCalc_PtOrdered->at(ijet)+theJetCSVbb_JetSubCalc_PtOrdered->at(ijet) > 0.4941)) continue; //without b-tag SFs	  
@@ -144,7 +149,13 @@ void step2::Loop()
 		  }
 		}
 	  }
-
+     HT_2m = AK4HT - (BJetLeadPt+BjetSecondPt);
+//      if (HT_2m<0){
+//      std::cout<<"AK4HT : "<<AK4HT<<std::endl;
+//      std::cout<<"BJetLeadPt : "<<BJetLeadPt<<std::endl;
+//      std::cout<<"BjetSecondPt : "<<BjetSecondPt<<std::endl;
+//      std::cout<<" "<<std::endl;
+//      }
 //////////////////////////////////////////
 // build centrality //
 //////////////////////////////////////////
