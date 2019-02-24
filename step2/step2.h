@@ -145,8 +145,10 @@ public :
    Float_t         lepDR_minBBdr;
    Float_t         HT_bjets;
    Float_t         HT_ratio;        
-   Float_t         HT_2m;        
-   
+   Float_t         HT_2m;
+   Float_t         thirdcsvb_bb;        
+   Float_t         fourthcsvb_bb;        
+      
    // List of branches
    TBranch        *b_event_CommonCalc;   //!
    TBranch        *b_run_CommonCalc;   //!

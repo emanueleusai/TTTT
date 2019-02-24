@@ -59,7 +59,9 @@ void step2::Loop()
    outputTree->Branch("HT_bjets",&HT_bjets,"HT_bjets/F");     
    outputTree->Branch("HT_ratio",&HT_ratio,"HT_ratio/F");        
    outputTree->Branch("HT_2m",&HT_2m,"HT_2m/F");        
-      
+   outputTree->Branch("thirdcsvb_bb",&thirdcsvb_bb,"thirdcsvb_bb");        
+   outputTree->Branch("fourthcsvb_bb",&fourthcsvb_bb,"fourthcsvb_bb/F");           
+
    Long64_t nentries = inputTree->GetEntriesFast();
    Long64_t nbytes = 0, nb = 0;
    TLorentzVector bjet1, bjet2, jet1, jet2, jet3, lep;   
@@ -113,6 +115,7 @@ void step2::Loop()
          HT_ratio = HT_4jets/HT_other;
      }
 
+     std::vector<float> v_CSVb_bb;
      
      for(unsigned int ijet = 0; ijet < theJetPt_JetSubCalc_PtOrdered->size(); ijet++){
 		if(njetscsv<=10 && theJetCSVb_JetSubCalc_PtOrdered->at(ijet)>=0 && theJetCSVbb_JetSubCalc_PtOrdered->at(ijet)>=0){
@@ -120,7 +123,9 @@ void step2::Loop()
 		   aveCSVpt += (theJetCSVb_JetSubCalc_PtOrdered->at(ijet)+theJetCSVbb_JetSubCalc_PtOrdered->at(ijet))*theJetPt_JetSubCalc_PtOrdered->at(ijet);
 		}
 		totalJetPt+=theJetPt_JetSubCalc_PtOrdered->at(ijet);
-		totalJetE+=theJetEnergy_JetSubCalc_PtOrdered->at(ijet);		
+		totalJetE+=theJetEnergy_JetSubCalc_PtOrdered->at(ijet);
+				
+		v_CSVb_bb.push_back(theJetCSVb_JetSubCalc_PtOrdered->at(ijet)+theJetCSVbb_JetSubCalc_PtOrdered->at(ijet));
 		
 		if(!(theJetCSVb_JetSubCalc_PtOrdered->at(ijet)+theJetCSVbb_JetSubCalc_PtOrdered->at(ijet) > 0.4941)) continue; //without b-tag SFs
 		
@@ -149,13 +154,13 @@ void step2::Loop()
 		  }
 		}
 	  }
+     std::sort(v_CSVb_bb.rbegin(), v_CSVb_bb.rend());
+     for (auto csvb_bb = v_CSVb_bb.begin(); csvb_bb != v_CSVb_bb.end(); ++csvb_bb){
+        std::cout << *csvb_bb << std::endl;     
+     }
+     thirdcsvb_bb = v_CSVb_bb.at(2);
+     fourthcsvb_bb = v_CSVb_bb.at(3);
      HT_2m = AK4HT - (BJetLeadPt+BjetSecondPt);
-//      if (HT_2m<0){
-//      std::cout<<"AK4HT : "<<AK4HT<<std::endl;
-//      std::cout<<"BJetLeadPt : "<<BJetLeadPt<<std::endl;
-//      std::cout<<"BjetSecondPt : "<<BjetSecondPt<<std::endl;
-//      std::cout<<" "<<std::endl;
-//      }
 //////////////////////////////////////////
 // build centrality //
 //////////////////////////////////////////
