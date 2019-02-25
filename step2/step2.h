@@ -20,8 +20,10 @@
 
 class step2 {
 public :
+   //!pointer to the analyzed TTree or TChain
    TTree          *inputTree;   //!pointer to the analyzed TTree or TChain
    TFile          *inputFile, *outputFile;
+
    Int_t           fCurrent; //!current Tree number in a TChain
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
@@ -132,7 +134,8 @@ public :
    Float_t         minDR_leadAK8otherAK8;
    Float_t         minDR_lepAK8;
    vector<double>  *deltaR_lepAK8s;
-
+   vector<double>  deltaPhi_METjets;
+   
    //Additional Variables from the charged higgs analysis
    Float_t         minBBdr;
    Float_t         deltaR_minBB;
@@ -147,7 +150,40 @@ public :
    Float_t         HT_ratio;        
    Float_t         HT_2m;
    Float_t         thirdcsvb_bb;        
-   Float_t         fourthcsvb_bb;        
+   Float_t         fourthcsvb_bb;  
+   Float_t         PtFifthJet;      
+
+   Float_t         mass_minBBdr;   
+   Float_t         mass_minLLdr;
+   Float_t         mass_maxBBpt;
+   Float_t         mass_maxBBmass;
+   Float_t         theJetLeadPt;
+   Float_t         mass_lepJets0;
+   Float_t         mass_lepJets1;
+   Float_t         mass_lepJets2;
+   Float_t         deltaR_lepBJets0;
+   Float_t         deltaR_lepBJets1;   
+   Float_t         minDR_lepBJet;
+   Float_t         mass_lepBJet0;
+   Float_t         mass_lepBB_minBBdr;
+   Float_t         mass_lepJJ_minJJdr;
+   Float_t         mass_lepBJet_mindr;
+   Float_t         deltaR_lepBJet_maxpt;
+   Float_t         deltaPhi_maxBB;
+   Float_t         hemiout;
+   Float_t         corr_met;
+   Float_t         deltaPhi_lepMET;
+   Float_t         min_deltaPhi_METjets;
+   Float_t         aveCSV;
+   Float_t         deltaPhi_j1j2;
+   Float_t         alphaT;
+   Float_t         FW_momentum_0;
+   Float_t         FW_momentum_1;
+   Float_t         FW_momentum_3;
+   Float_t         FW_momentum_4;
+   Float_t         FW_momentum_5;
+   Float_t         FW_momentum_6;
+
       
    // List of branches
    TBranch        *b_event_CommonCalc;   //!
@@ -269,7 +305,7 @@ public :
 #endif
 
 #ifdef step2_cxx
-step2::step2(TString inputFileName, TString outputFileName) : inputTree(0), inputFile(0), outputFile(0) 
+step2::step2(TString inputFileName, TString outputFileName)// : inputTree(0), inputFile(0), outputFile(0) 
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
@@ -280,12 +316,13 @@ step2::step2(TString inputFileName, TString outputFileName) : inputTree(0), inpu
 //       }
 //       f->GetObject("ljmet",tree);
 // 
-//    }
- 
-   inputFile=TFile::Open(inputFileName);
-   inputTree=(TTree*)inputFile->Get("ljmet");  
-   outputFile=new TFile(outputFileName,"RECREATE");
+//    } 
+
+   inputFile=new TFile(inputFileName);
+   inputTree = (TTree*)inputFile->Get("ljmet");  
+   inputTree->SetBranchStatus("*",1);   
    Init(inputTree);
+   outputFile = new TFile(outputFileName,"RECREATE");   
 }
 
 step2::~step2()
@@ -371,7 +408,7 @@ void step2::Init(TTree *tree)
    if (!tree) return;
    inputTree = tree;
    fCurrent = -1;
-   inputTree->SetMakeClass(1);
+//    inputTree->SetMakeClass(1);
 
    inputTree->SetBranchAddress("event_CommonCalc", &event_CommonCalc, &b_event_CommonCalc);
    inputTree->SetBranchAddress("run_CommonCalc", &run_CommonCalc, &b_run_CommonCalc);
