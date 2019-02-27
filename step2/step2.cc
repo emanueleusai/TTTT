@@ -386,7 +386,6 @@ void step2::Loop()
                 }
             }
             tempTtrijetMass = (v_trijet[0]+v_trijet[1]+v_trijet[2]).M();
-            if (fabs(tempTtrijetMass-MTOP)> 30){continue;}
             if (fabs(tempTtrijetMass-MTOP)< diff_TopMass){
                 diff_TopMass    = fabs(tempTtrijetMass-MTOP);
                 BestTOPjet1     = v_trijet[0];
@@ -451,9 +450,7 @@ void step2::Loop()
                 }
             }
             tempTtrijetMass = (v_BADtrijet[0]+v_BADtrijet[1]+v_BADtrijet[2]).M();
-            if (fabs(tempTtrijetMass-MTOP)> 30){continue;}            
             if (fabs(tempTtrijetMass-MTOP) == diff_TopMass){
-//                 std::cout<<"good Trijet"<<std::endl;
                 continue;
             }            
             else{            
