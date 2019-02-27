@@ -81,6 +81,7 @@ public :
    Float_t         topPtGen;
    Float_t         topMass;
    Float_t         minMleppBjet;
+   Float_t         tmp_minMleppBjet;
    Float_t         minMleppJet;
    Float_t         genTopPt;
    Float_t         genAntiTopPt;
@@ -133,6 +134,16 @@ public :
    Int_t           NJetsTtagged_0p81;
    Float_t         minDR_leadAK8otherAK8;
    Float_t         minDR_lepAK8;
+   Float_t         GD_DR_Tridijet;
+   vector<double>  BD_DR_Tridijet;   
+   Float_t         GD_Ttrijet_TopMass;
+   vector<double>  BD_Ttrijet_TopMass;
+   Float_t         GD_Mass_minDR_dijet;
+   vector<double>  BD_Mass_minDR_dijet;
+   Float_t         GD_pTrat;
+   vector<double>  BD_pTrat;
+   Float_t         GD_DR_Trijet_jetNotdijet;
+   vector<double>  BD_DR_Trijet_jetNotdijet;  
    vector<double>  *deltaR_lepAK8s;
    vector<double>  deltaPhi_METjets;
    
@@ -151,8 +162,19 @@ public :
    Float_t         HT_2m;
    Float_t         thirdcsvb_bb;        
    Float_t         fourthcsvb_bb;  
-   Float_t         PtFifthJet;      
-
+   Float_t         PtFifthJet;
+   Float_t         deltaR_lepJetInMinMljet;      
+   Float_t         deltaPhi_lepJetInMinMljet;         
+   Float_t         deltaR_lepbJetInMinMlb;
+   Float_t         deltaPhi_lepbJetInMinMlb;
+   Float_t         MT2bb;
+   Float_t         csvJet3;
+   Float_t         csvJet4;
+   Float_t         MHRE;
+   Float_t         HTx;
+   Float_t         GD_DCSV_jetNotdijet;
+   vector<double>  BD_DCSV_jetNotdijet;   
+      
    Float_t         mass_minBBdr;   
    Float_t         mass_minLLdr;
    Float_t         mass_maxBBpt;
