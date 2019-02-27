@@ -152,14 +152,14 @@ void step2::Loop()
      mass_maxJJJpt = -1;      
      FW_momentum_0=0; FW_momentum_1=0; FW_momentum_2=0; FW_momentum_3=0; FW_momentum_4=0; FW_momentum_5=0; FW_momentum_6=0;
      centrality = -1;      
-     HT_bjets = 0;
-     HT_ratio = 0; //for ratio of HT(j1,2,3,4)/HT(other jets)     
-     HT_2m = -1000;
+     HT_bjets = -10;
+     HT_ratio = -1; //for ratio of HT(j1,2,3,4)/HT(other jets)     
+     HT_2m = -10;
      theJetLeadPt = -1000; 
      mass_lepJets0 = -1;             
      mass_lepJets1 = -1;                          
      mass_lepJets2 = -1;  
-     MHRE = 0;     
+     MHRE = -100;     
      HTx = 0;                             
      int njetscsv = 0;      
      double maxBBdeta = 0;
@@ -396,45 +396,55 @@ void step2::Loop()
                 DCSV_BestTOPjet3     = v_DCSV_trijet[2];
                 Mag_Trijet = (BestTOPjet1+BestTOPjet2+BestTOPjet3).Mag();
                 ScalarSumpT_Trijet = (BestTOPjet1.Pt()+BestTOPjet2.Pt()+BestTOPjet3.Pt());
-                GD_pTrat = Mag_Trijet/ScalarSumpT_Trijet;                                            
+
             }            
      } while(std::prev_permutation(bitmask.begin(), bitmask.end()));          
-     GD_Ttrijet_TopMass = (BestTOPjet1+BestTOPjet2+BestTOPjet3).M();
-     double v_dr[3];
-     TLorentzVector dijet, jetNotdijet;
-     
-     v_dr[0] = BestTOPjet1.DeltaR(BestTOPjet2);
-     v_dr[1] = BestTOPjet1.DeltaR(BestTOPjet3);
-     v_dr[2] = BestTOPjet2.DeltaR(BestTOPjet3); 
-     int idx_minDR_jetCombo = std::min_element(v_dr, v_dr+3) - v_dr;
-     if(idx_minDR_jetCombo==0){
-         dijet = BestTOPjet1+BestTOPjet2;
-         jetNotdijet = BestTOPjet3;
-         GD_DCSV_jetNotdijet = DCSV_BestTOPjet3;
-     }
-     else if (idx_minDR_jetCombo==1){                                     
-         dijet = BestTOPjet1+BestTOPjet3;
-         jetNotdijet = BestTOPjet2;
-         GD_DCSV_jetNotdijet = DCSV_BestTOPjet2;         
-     }
-     else if (idx_minDR_jetCombo==2){
-         dijet = BestTOPjet2+BestTOPjet3;     
-         jetNotdijet = BestTOPjet1;
-         GD_DCSV_jetNotdijet = DCSV_BestTOPjet1;         
-     }
-     GD_Mass_minDR_dijet = dijet.M();
-     GD_DR_Tridijet = (BestTOPjet1+BestTOPjet2+BestTOPjet3).DeltaR(dijet);
-     GD_DR_Trijet_jetNotdijet = (BestTOPjet1+BestTOPjet2+BestTOPjet3).DeltaR(jetNotdijet);
-     TLorentzVector totalSumJetVect, totalSumJetVect_noTrijet;
 
-     for(unsigned int njet = 0; njet < v_allJets.size(); ++njet){
-        totalSumJetVect += v_allJets[njet];
+     if (diff_TopMass>30){
+        GD_pTrat = -10;  
+        GD_Ttrijet_TopMass = -10;
+        GD_DCSV_jetNotdijet = -10;
+        GD_Mass_minDR_dijet = -10;
+        GD_DR_Tridijet = -10;
+        GD_DR_Trijet_jetNotdijet = -10;
+        MHRE = -100;
+        HTx = -100;
      }
-     totalSumJetVect_noTrijet = totalSumJetVect-BestTOPjet1-BestTOPjet2-BestTOPjet3;
-     MHRE = totalSumJetVect_noTrijet.M();
-     HTx = AK4HT-BestTOPjet1.Pt()-BestTOPjet2.Pt()-BestTOPjet3.Pt();
-     
-
+     else{
+         GD_pTrat = Mag_Trijet/ScalarSumpT_Trijet;                                            
+         GD_Ttrijet_TopMass = (BestTOPjet1+BestTOPjet2+BestTOPjet3).M();
+         double v_dr[3];
+         TLorentzVector dijet, jetNotdijet;     
+         v_dr[0] = BestTOPjet1.DeltaR(BestTOPjet2);
+         v_dr[1] = BestTOPjet1.DeltaR(BestTOPjet3);
+         v_dr[2] = BestTOPjet2.DeltaR(BestTOPjet3); 
+         int idx_minDR_jetCombo = std::min_element(v_dr, v_dr+3) - v_dr;
+         if(idx_minDR_jetCombo==0){
+             dijet = BestTOPjet1+BestTOPjet2;
+             jetNotdijet = BestTOPjet3;
+             GD_DCSV_jetNotdijet = DCSV_BestTOPjet3;
+         }
+         else if (idx_minDR_jetCombo==1){                                     
+             dijet = BestTOPjet1+BestTOPjet3;
+             jetNotdijet = BestTOPjet2;
+             GD_DCSV_jetNotdijet = DCSV_BestTOPjet2;         
+         }
+         else if (idx_minDR_jetCombo==2){
+             dijet = BestTOPjet2+BestTOPjet3;     
+             jetNotdijet = BestTOPjet1;
+             GD_DCSV_jetNotdijet = DCSV_BestTOPjet1;         
+         }
+         GD_Mass_minDR_dijet = dijet.M();
+         GD_DR_Tridijet = (BestTOPjet1+BestTOPjet2+BestTOPjet3).DeltaR(dijet);
+         GD_DR_Trijet_jetNotdijet = (BestTOPjet1+BestTOPjet2+BestTOPjet3).DeltaR(jetNotdijet);
+         TLorentzVector totalSumJetVect, totalSumJetVect_noTrijet;
+         for(unsigned int njet = 0; njet < v_allJets.size(); ++njet){
+            totalSumJetVect += v_allJets[njet];
+         }
+         totalSumJetVect_noTrijet = totalSumJetVect-BestTOPjet1-BestTOPjet2-BestTOPjet3;
+         MHRE = totalSumJetVect_noTrijet.M();
+         HTx = AK4HT-BestTOPjet1.Pt()-BestTOPjet2.Pt()-BestTOPjet3.Pt();
+     }
      double DCSV_BADTOPjet1=0;
      double DCSV_BADTOPjet2=0;
      double DCSV_BADTOPjet3=0;     
@@ -452,7 +462,8 @@ void step2::Loop()
             tempTtrijetMass = (v_BADtrijet[0]+v_BADtrijet[1]+v_BADtrijet[2]).M();
             if (fabs(tempTtrijetMass-MTOP) == diff_TopMass){
                 continue;
-            }            
+            }
+            else if (fabs(tempTtrijetMass-MTOP) > 30){ continue; }                       
             else{            
                 BADTOPjet1     = v_BADtrijet[0];
                 BADTOPjet2     = v_BADtrijet[1];                
@@ -661,21 +672,21 @@ void step2::Loop()
 	  b_FW_momentum_4->Fill();
 	  b_FW_momentum_5->Fill();
 	  b_FW_momentum_6->Fill();
-     
-      b_GD_DCSV_jetNotdijet->Fill();
-      b_BD_DCSV_jetNotdijet->Fill();      
       b_csvJet3->Fill();
       b_csvJet4->Fill();      
+     
 	  b_GD_pTrat->Fill();
 	  b_BD_pTrat->Fill();	  
-	  b_GD_Ttrijet_TopMass->Fill();
-	  b_BD_Ttrijet_TopMass->Fill();
       b_GD_DR_Tridijet->Fill();
 	  b_BD_DR_Tridijet->Fill();
-	  b_GD_DR_Trijet_jetNotdijet->Fill();
-	  b_BD_DR_Trijet_jetNotdijet->Fill();
+	  b_GD_Ttrijet_TopMass->Fill();
+	  b_BD_Ttrijet_TopMass->Fill();
+      b_GD_DCSV_jetNotdijet->Fill();
+      b_BD_DCSV_jetNotdijet->Fill();      
 	  b_GD_Mass_minDR_dijet->Fill();	  
 	  b_BD_Mass_minDR_dijet->Fill();	  	  
+	  b_GD_DR_Trijet_jetNotdijet->Fill();
+	  b_BD_DR_Trijet_jetNotdijet->Fill();
 	  b_deltaR_lepJetInMinMljet->Fill();
 	  b_deltaPhi_lepJetInMinMljet->Fill();	  
 	  b_deltaR_lepbJetInMinMlb->Fill();
