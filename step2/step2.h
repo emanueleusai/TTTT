@@ -155,11 +155,13 @@ public :
    Float_t         FW_momentum_2;
    Float_t         centrality;
    Float_t         aveCSVpt;
-   Float_t         mass_maxJJJpt;
+   Float_t         mass_maxJJJpt; 
    Float_t         lepDR_minBBdr;
    Float_t         HT_bjets;
    Float_t         HT_ratio;        
    Float_t         HT_2m;
+   Float_t         firstcsvb_bb;        
+   Float_t         secondcsvb_bb;        
    Float_t         thirdcsvb_bb;        
    Float_t         fourthcsvb_bb;  
    Float_t         PtFifthJet;
@@ -167,11 +169,26 @@ public :
    Float_t         deltaPhi_lepJetInMinMljet;         
    Float_t         deltaR_lepbJetInMinMlb;
    Float_t         deltaPhi_lepbJetInMinMlb;
-   Float_t         MT2bb;
+   Float_t         MT2bb; 
+   Float_t         pt3HT;
+   Float_t         pt4HT;   
+   Float_t         pTjet5_6;
+   Float_t         invM_jet34;
+   Float_t         invM_jet35;   
+   Float_t         invM_jet36;
+   Float_t         invM_jet45;         
+   Float_t         invM_jet46;         
+   Float_t         invM_jet56;            
+   Float_t         mean_csv;
+   Float_t         csvJet1;
+   Float_t         csvJet2;
    Float_t         csvJet3;
    Float_t         csvJet4;
+   Float_t         pT_3rdcsvJet;
+   Float_t         pT_4thcsvJet;      
    Float_t         MHRE;
    Float_t         HTx;
+   Float_t         deltaR_lepbJetNotInMinMlb;
    Float_t         GD_DCSV_jetNotdijet;
    vector<double>  BD_DCSV_jetNotdijet;   
       
@@ -206,7 +223,14 @@ public :
    Float_t         FW_momentum_5;
    Float_t         FW_momentum_6;
 
-      
+   Float_t         HT_woBESTjet;
+   Float_t         MT_woBESTjet;
+   Float_t         PT_woBESTjet;      
+   Float_t         M_woBESTjet;            
+   Float_t         M_allJet_W;
+   Float_t         ratio_HTdHT4leadjets;
+   Float_t         W_PtdM;
+                   
    // List of branches
    TBranch        *b_event_CommonCalc;   //!
    TBranch        *b_run_CommonCalc;   //!
