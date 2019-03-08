@@ -14,6 +14,7 @@
 #include <vector>
 #include "TMath.h"
 #include <cmath>
+#include <TMatrixD.h>
 
 #include "Davismt2.h"
 
@@ -22,6 +23,36 @@ using namespace std;
 const double MTOP  = 173.5;
 const double MW    = 80.4;
 TLorentzVector Wlv;
+
+TMatrixD SpheAplaTensor(const vector<TLorentzVector> allJets){
+      TMatrixD MomentumTensor(3,3); 
+      Double_t p2_sum=0.0;
+      for(unsigned int njet = 0; njet < allJets.size(); ++njet){
+        MomentumTensor(0, 0) += allJets[njet].Px()*allJets[njet].Px();
+        MomentumTensor(0, 1) += allJets[njet].Px()*allJets[njet].Py();
+        MomentumTensor(0, 2) += allJets[njet].Px()*allJets[njet].Pz();
+        MomentumTensor(1, 0) += allJets[njet].Py()*allJets[njet].Px();
+        MomentumTensor(1, 1) += allJets[njet].Py()*allJets[njet].Py();
+        MomentumTensor(1, 2) += allJets[njet].Py()*allJets[njet].Pz();
+        MomentumTensor(2, 0) += allJets[njet].Pz()*allJets[njet].Px();
+        MomentumTensor(2, 1) += allJets[njet].Pz()*allJets[njet].Py();
+        MomentumTensor(2, 2) += allJets[njet].Pz()*allJets[njet].Pz();
+        p2_sum += allJets[njet].Px()*allJets[njet].Px()+allJets[njet].Py()*allJets[njet].Py()+allJets[njet].Pz()*allJets[njet].Pz();
+      }
+      if (p2_sum != 0){
+          MomentumTensor(0, 0) /= p2_sum;
+          MomentumTensor(0, 1) /= p2_sum;
+          MomentumTensor(0, 2) /= p2_sum;
+          MomentumTensor(1, 0) /= p2_sum;
+          MomentumTensor(1, 1) /= p2_sum;
+          MomentumTensor(1, 2) /= p2_sum;
+          MomentumTensor(2, 0) /= p2_sum;
+          MomentumTensor(2, 1) /= p2_sum;
+          MomentumTensor(2, 2) /= p2_sum;
+      }
+      TVectorD *_pv = new TVectorD(3);
+      return MomentumTensor;
+}
 
 bool compareFunc(const pair<TLorentzVector, double> &a, const pair<TLorentzVector, double> &b){
     return (a.second > b.second);
@@ -239,6 +270,9 @@ void step2::Loop()
    TBranch *b_invM_jet46                = outputTree->Branch("invM_jet46",&invM_jet46,"invM_jet46/F");            
    TBranch *b_invM_jet56                = outputTree->Branch("invM_jet56",&invM_jet56,"invM_jet56/F");                        
 
+   TBranch *b_Sphericity                = outputTree->Branch("Sphericity",&Sphericity,"Sphericity/F");                        
+   TBranch *b_Aplanarity                = outputTree->Branch("Aplanarity",&Aplanarity,"Aplanarity/F");                              
+
    Long64_t nentries = inputTree->GetEntriesFast();
    Long64_t nbytes = 0, nb = 0;
    TLorentzVector bjet1, bjet2, jet1, jet2, jet3, lep, met, jetTmp, BestTOPjet1, BestTOPjet2, BestTOPjet3, BADTOPjet1, BADTOPjet2, BADTOPjet3;   
@@ -278,6 +312,8 @@ void step2::Loop()
      mass_lepJets2 = -1;  
      MHRE = -100;     
      HTx = 0;                             
+     Sphericity = -1;
+     Aplanarity	= -1;  
      int njetscsv = 0;      
      double maxBBdeta = 0;
      double totalJetPt = 0; //this is mainly HT
@@ -300,7 +336,7 @@ void step2::Loop()
          HT_ratio = HT_4jets/HT_other;
          ratio_HTdHT4leadjets = AK4HT/HT_4jets;
      }
-//      std::cout<<"deltaR_lepJets->at(0) : "<<deltaR_lepJets->at(0)<<std::endl;
+
      corr_met = (float) corr_met_singleLepCalc;
      theJetLeadPt = theJetPt_JetSubCalc_PtOrdered->at(0);
      
@@ -395,11 +431,6 @@ void step2::Loop()
 
 
      for(unsigned int ijet = 0; ijet < theJetPt_JetSubCalc_PtOrdered->size(); ijet++){
-// 		if(njetscsv<=10 && theJetCSVb_JetSubCalc_PtOrdered->at(ijet)>=0 && theJetCSVbb_JetSubCalc_PtOrdered->at(ijet)>=0){ 
-//      njetscsv cut <10 applied for the charged higgs analysis. remove this for 4 tops analysis
-// 		if(theJetBTag_JetSubCalc_PtOrdered->at(ijet) == 0){
-
-
 		if(theJetCSVb_JetSubCalc_PtOrdered->at(ijet)+theJetCSVbb_JetSubCalc_PtOrdered->at(ijet) < 0.4941){
 		   njetscsv+=1;
 		   totalPtCSV += theJetPt_JetSubCalc_PtOrdered->at(ijet);
@@ -415,7 +446,6 @@ void step2::Loop()
           deltaR_lepJetInMinMljet  = jetTmp.DeltaR(lep);
           deltaPhi_lepJetInMinMljet = jetTmp.DeltaPhi(lep);
         }		
-//         if(theJetBTag_JetSubCalc_PtOrdered->at(ijet) == 1){
 		if(theJetCSVb_JetSubCalc_PtOrdered->at(ijet)+theJetCSVbb_JetSubCalc_PtOrdered->at(ijet) > 0.4941){        
           if((lep + jetTmp).M() < tmp_minMleppBjet) {
             tmp_minMleppBjet = fabs((lep + jetTmp).M() );
@@ -468,7 +498,6 @@ void step2::Loop()
 		deltaPhi_METjets.push_back(deltaPhifromMET_);
 		if(min_deltaPhi_METjets>fabs(deltaPhifromMET_)){min_deltaPhi_METjets=fabs(deltaPhifromMET_);}
 		if(abs(deltaPhifromMET_)>TMath::Pi()/2){hemiout+=theJetPt_JetSubCalc_PtOrdered->at(ijet);}				
-// 		v_CSVb_bb.push_back(theJetCSVb_JetSubCalc_PtOrdered->at(ijet)+theJetCSVbb_JetSubCalc_PtOrdered->at(ijet));
 		
 		if(!(theJetCSVb_JetSubCalc_PtOrdered->at(ijet)+theJetCSVbb_JetSubCalc_PtOrdered->at(ijet) > 0.4941)) continue; //without b-tag SFs
 		
@@ -556,15 +585,11 @@ void step2::Loop()
       PT_woBESTjet = (totalJetVectSum-bestJetinWjet).Pt();
       M_woBESTjet = (totalJetVectSum-bestJetinWjet).M();      
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	  
 	  
-//////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////
-/////// trijet selection ///////
-////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////// trijet selection ///////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
      std::string bitmask(3,1);
      bitmask.resize(v_allJets.size(),0);
      double tempTtrijetMass = 0;
@@ -706,13 +731,7 @@ void step2::Loop()
      } while(std::prev_permutation(bitmask.begin(), bitmask.end()));          
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-
-//      std::sort(v_CSVb_bb.rbegin(), v_CSVb_bb.rend());
      std::sort(v_DCSV_allJets.rbegin(), v_DCSV_allJets.rend());
-//      for (auto csvb_bb = v_CSVb_bb.begin(); csvb_bb != v_CSVb_bb.end(); ++csvb_bb){
-//         std::cout << *csvb_bb << std::endl;     
-//      }
-
      
      firstcsvb_bb = v_DCSV_allJets.at(0);
      secondcsvb_bb = v_DCSV_allJets.at(1);
@@ -731,7 +750,10 @@ void step2::Loop()
       	aveCSVpt = (aveCSVpt+1)/totalPtCSV;
       	}
       else{aveCSV = coin; aveCSVpt = coin;}
-      if(totalJetE!=0) {centrality = totalJetPt/totalJetE;}	  
+      if(totalJetE!=0) {
+        centrality = totalJetPt/totalJetE;
+        
+      }	  
       double diff_temppairmass = 1e9;
       TLorentzVector jet1_W, jet2_W;
       // FIND LIGHT PAIRS
@@ -864,6 +886,17 @@ void step2::Loop()
 		  FW_momentum_6 += ET_ij_over_ETSum2 * 0.0625* (231*std::pow(cosTheta_ij,6)-315*std::pow(cosTheta_ij,4)+105*std::pow(cosTheta_ij,2)-5);
 		}
 	  }
+
+//////////////////////////////////////////////////////////////////////////////////
+////////////////////////////// Sphericity Aplanarity//////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////           
+      TMatrixD M_Tensor = SpheAplaTensor(v_allJets);
+      TVectorD *_pv = new TVectorD(3);      
+      M_Tensor.EigenVectors(*_pv);
+	  Sphericity = 1.5 * ( (*_pv)[2] + (*_pv)[1] );
+	  Aplanarity = 1.5 * ( (*_pv)[2] );	  
+//////////////////////////////////////////////////////////////////////////////////     	  
+	  
 	  b_isTraining->Fill();
 	  b_deltaR_minBB->Fill();
 	  b_aveBBdr->Fill();
@@ -956,9 +989,9 @@ void step2::Loop()
 	  b_invM_jet46->Fill(); 
 	  b_invM_jet56->Fill(); 
 
-
-
-
+      b_Sphericity->Fill(); 
+      b_Aplanarity->Fill(); 
+		  
    }
 std::cout<<"DONE "<<nentries<<std::endl;   
 outputFile->Write();
