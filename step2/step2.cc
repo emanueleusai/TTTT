@@ -432,6 +432,11 @@ void step2::Loop()
 
 
      for(unsigned int ijet = 0; ijet < theJetPt_JetSubCalc_PtOrdered->size(); ijet++){
+// 		if(njetscsv<=10 && theJetCSVb_JetSubCalc_PtOrdered->at(ijet)>=0 && theJetCSVbb_JetSubCalc_PtOrdered->at(ijet)>=0){ 
+//      njetscsv cut <10 applied for the charged higgs analysis. remove this for 4 tops analysis
+// 		if(theJetBTag_JetSubCalc_PtOrdered->at(ijet) == 0){
+
+
 		if(theJetCSVb_JetSubCalc_PtOrdered->at(ijet)+theJetCSVbb_JetSubCalc_PtOrdered->at(ijet) < 0.4941){
 		   njetscsv+=1;
 		   totalPtCSV += theJetPt_JetSubCalc_PtOrdered->at(ijet);
@@ -627,6 +632,7 @@ void step2::Loop()
             }            
      } while(std::prev_permutation(bitmask.begin(), bitmask.end()));          
 
+
      if (diff_TopMass>30 and bool_TopMassCut){
         GD_pTrat = -10;  
         GD_Ttrijet_TopMass = -10;
@@ -690,6 +696,7 @@ void step2::Loop()
             if (fabs(tempTtrijetMass-MTOP) == diff_TopMass){
                 continue;
             }
+
             else if (fabs(tempTtrijetMass-MTOP) > 30 and bool_TopMassCut){ continue; }                       
             else{            
                 BADTOPjet1     = v_BADtrijet[0];
@@ -751,6 +758,7 @@ void step2::Loop()
       	aveCSVpt = (aveCSVpt+1)/totalPtCSV;
       	}
       else{aveCSV = coin; aveCSVpt = coin;}
+
       if(totalJetE!=0) {
         centrality = totalJetPt/totalJetE;
         
