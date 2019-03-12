@@ -276,6 +276,7 @@ void step2::Loop()
    Long64_t nentries = inputTree->GetEntriesFast();
    Long64_t nbytes = 0, nb = 0;
    TLorentzVector bjet1, bjet2, jet1, jet2, jet3, lep, met, jetTmp, BestTOPjet1, BestTOPjet2, BestTOPjet3, BADTOPjet1, BADTOPjet2, BADTOPjet3;   
+   bool bool_TopMassCut = 1;
    
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
 //      std::cout<<"jentry : "<<jentry<<std::endl;
@@ -626,7 +627,7 @@ void step2::Loop()
             }            
      } while(std::prev_permutation(bitmask.begin(), bitmask.end()));          
 
-     if (diff_TopMass>30){
+     if (diff_TopMass>30 and bool_TopMassCut){
         GD_pTrat = -10;  
         GD_Ttrijet_TopMass = -10;
         GD_DCSV_jetNotdijet = -10;
@@ -689,7 +690,7 @@ void step2::Loop()
             if (fabs(tempTtrijetMass-MTOP) == diff_TopMass){
                 continue;
             }
-            else if (fabs(tempTtrijetMass-MTOP) > 30){ continue; }                       
+            else if (fabs(tempTtrijetMass-MTOP) > 30 and bool_TopMassCut){ continue; }                       
             else{            
                 BADTOPjet1     = v_BADtrijet[0];
                 BADTOPjet2     = v_BADtrijet[1];                
