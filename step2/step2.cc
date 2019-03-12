@@ -276,7 +276,7 @@ void step2::Loop()
    Long64_t nentries = inputTree->GetEntriesFast();
    Long64_t nbytes = 0, nb = 0;
    TLorentzVector bjet1, bjet2, jet1, jet2, jet3, lep, met, jetTmp, BestTOPjet1, BestTOPjet2, BestTOPjet3, BADTOPjet1, BADTOPjet2, BADTOPjet3;   
-   bool bool_TopMassCut = 1;
+   bool bool_TopMassCut = 0;
    
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
 //      std::cout<<"jentry : "<<jentry<<std::endl;
