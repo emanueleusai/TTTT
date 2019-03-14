@@ -155,7 +155,7 @@ public :
    Float_t         FW_momentum_2;
    Float_t         centrality;
    Float_t         aveCSVpt;
-   Float_t         mass_maxJJJpt;
+   Float_t         mass_maxJJJpt; 
    Float_t         lepDR_minBBdr;
    Float_t         HT_bjets;
    Float_t         HT_ratio;        
@@ -188,6 +188,8 @@ public :
    Float_t         pT_4thcsvJet;      
    Float_t         MHRE;
    Float_t         HTx;
+   Float_t         Sphericity;
+   Float_t         Aplanarity;
    Float_t         deltaR_lepbJetNotInMinMlb;
    Float_t         GD_DCSV_jetNotdijet;
    vector<double>  BD_DCSV_jetNotdijet;   

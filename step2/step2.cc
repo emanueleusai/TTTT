@@ -755,6 +755,7 @@ void step2::Loop()
       	aveCSVpt = (aveCSVpt+1)/totalPtCSV;
       	}
       else{aveCSV = coin; aveCSVpt = coin;}
+
       if(totalJetE!=0) {
         centrality = totalJetPt/totalJetE;
         
