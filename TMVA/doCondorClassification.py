@@ -5,7 +5,8 @@ nTrees = '100'
 BDTlist = ['BDT']
 varListKeys = ['BigComb']
 runDir=os.getcwd()
-condorDir=runDir+'/weights/'
+condorDir=runDir+'/condor_log/'
+os.system('mkdir -p '+condorDir)
 note=''
 count=0
 for method in BDTlist:

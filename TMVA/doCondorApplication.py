@@ -19,7 +19,7 @@ outputDir = '/isilon/hadoop/store/user/jblee/TTTT/LJMet94X_1lepTT_022719_step2_s
 inputDir += '/'+shift+'/'
 runDir=os.getcwd()
 varList = varsList.varList[varListKey]
-condorDir=runDir+'/'+outputDir.split('/')[-3]+'_condorLogs/'+shift+'/'
+condorDir=runDir+'/Application'+outputDir.split('/')[-3]+'_condorLogs/'+shift+'/'
 os.system('mkdir -p '+condorDir)
 
 f = open(templateFile, 'rU')
