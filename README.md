@@ -14,10 +14,10 @@ STEP2
 BDT
 1. go to TMVA directory
 2. python doCondorClassification.py
-    specify -   number of trees, variable set label to use for training as in varsList.py
+*specify - number of trees, variable set label to use for training as in varsList.py
 3. python TMVAPlotting.py
-    specify a path for your training output root file
+*specify a path for your training output root file
 4. python doCondorApplication.py [SHIFTS]
-    specify -   path for your training output xml file and step2 root files, path to save BDT weight applied output files, variable set label used for training
+*specify - path for your training output xml file and step2 root files, path to save BDT weight applied output files, variable set label used for training
                 
     
