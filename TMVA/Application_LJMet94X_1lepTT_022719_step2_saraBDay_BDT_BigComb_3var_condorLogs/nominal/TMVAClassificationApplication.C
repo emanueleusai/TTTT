@@ -247,16 +247,3 @@ void TMVAClassificationApplication( TString myMethodList = "", TString inputFile
     
    std::cout << "==> TMVAClassificationApplication is done!" << std::endl << std::endl;
 } 
-
-// int main( int argc, char** argv )
-// {
-//    TString methodList; 
-//    for (int i=1; i<argc; i++) {
-//       TString regMethod(argv[i]);
-//       if(regMethod=="-b" || regMethod=="--batch") continue;
-//       if (!methodList.IsNull()) methodList += TString(","); 
-//       methodList += regMethod;
-//    }
-//    TMVAClassificationApplication(methodList,inputFile,outputFile); 
-//    return 0; 
-// }

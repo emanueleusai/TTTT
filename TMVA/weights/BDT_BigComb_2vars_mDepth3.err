@@ -1,7 +1,0 @@
-Error in <TSystem::ExpandFileName>: input: $HOME/.root.mimes, output: $HOME/.root.mimes
-Traceback (most recent call last):
-  File "TMVAClassification.py", line 366, in <module>
-    main()
-  File "TMVAClassification.py", line 182, in main
-    else: factory.AddVariable(iVar[0],iVar[1],iVar[2],'F')
-AttributeError: 'Factory' object has no attribute 'AddVariable'
