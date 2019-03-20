@@ -4,11 +4,11 @@
     <Info name="TMVA Release" value="4.2.1 [262657]"/>
     <Info name="ROOT Release" value="6.16/00 [397312]"/>
     <Info name="Creator" value="jlee"/>
-    <Info name="Date" value="Wed Mar 20 09:22:18 2019"/>
+    <Info name="Date" value="Wed Mar 20 11:19:15 2019"/>
     <Info name="Host" value="Linux lcgapp-centos7-x86-64-25.cern.ch 3.10.0-862.11.6.el7.x86_64 #1 SMP Tue Aug 14 21:49:04 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux"/>
     <Info name="Dir" value="/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/TMVA"/>
     <Info name="Training events" value="1570226"/>
-    <Info name="TrainingTime" value="3.72595170e+01"/>
+    <Info name="TrainingTime" value="3.81073232e+01"/>
     <Info name="AnalysisType" value="Classification"/>
   </GeneralInfo>
   <Options>
