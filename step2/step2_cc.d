@@ -226,5 +226,12 @@
 ./step2_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TRandom3.h
 ./step2_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc630/external/gcc/6.3.0/include/c++/6.3.0/sstream
 ./step2_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc630/external/gcc/6.3.0/include/c++/6.3.0/bits/sstream.tcc
+./step2_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TMatrixD.h
+./step2_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TMatrixDfwd.h
+./step2_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TMatrixDUtils.h
+./step2_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TMatrixDUtilsfwd.h
+./step2_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TVectorT.h
+./step2_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TMatrixTSym.h
+./step2_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TMatrixTSparse.h
 ./step2_cc.so: /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/RVersion.h /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/RConfig.h /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TClass.h /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TDictAttributeMap.h /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TInterpreter.h /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TROOT.h /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TBuffer.h /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TMemberInspector.h /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TError.h /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/RtypesImp.h /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TIsAProxy.h /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TFileMergeInfo.h /cvmfs/cms.cern.ch/slc7_amd64_gcc630/lcg/root/6.10.08-fmblme/include/TCollectionProxyInfo.h /cvmfs/cms.cern.ch/slc7_amd64_gcc630/cms/cmssw-patch/CMSSW_9_4_6_patch1/external/slc7_amd64_gcc630/bin/rootcling
 step2_cc__ROOTBUILDVERSION= 6.10/09
