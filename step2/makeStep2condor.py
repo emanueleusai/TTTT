@@ -7,9 +7,11 @@ shift = sys.argv[1]
 
 #IO directories must be full paths
 foldnum = '-1'
-relbase   = '/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/'
+#relbase   = '/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/'
+relbase    = '/home/mhadley/testBDTFromJangbae/CMSSW_9_4_6_patch1'
 inputDir  = '/mnt/hadoop/users/ssagir/LJMet94X_1lepTT_020619_step1hadds/'+shift+'/'
-outputDir = '/mnt/hadoop/users/jlee/TTTT/LJMet94X_1lepTT_022219_step2/'+shift+'/'
+#outputDir = '/mnt/hadoop/users/jlee/TTTT/LJMet94X_1lepTT_022219_step2/'+shift+'/'
+outputDir = '/mnt/hadoop/users/mhadley/TTTT/LJMet94X_1lepTT_032719_step2/'+shift+'/'
 
 runDir=os.getcwd()
 gROOT.ProcessLine('.x compileStep2.C')
@@ -27,7 +29,7 @@ os.system('mkdir -p '+condorDir)
 
 for file in rootfiles:
     if 'root' not in file: continue
-    if 'TTTT' not in file: continue
+#    if 'TTTT' not in file: continue
     rawname = file[:-6]
     count+=1
     dict={'RUNDIR':runDir, 'CONDORDIR':condorDir, 'INPUTDIR':inputDir, 'FILENAME':rawname, 'CMSSWBASE':relbase, 'OUTPUTDIR':outputDir}

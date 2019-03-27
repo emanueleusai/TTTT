@@ -171,6 +171,7 @@ void step2::Loop()
    TTree *outputTree = inputTree->CloneTree(); //Copy of Input Tree
 //    TTree *outputTree = new TTree("ljmet","ljmet"); //No Copy of Input Tree   
    TBranch *b_isTraining            = outputTree->Branch("isTraining",&isTraining,"isTraining/I");
+   TBranch *b_xsecEff               = outputTree->Branch("xsecEff",&xsecEff,"xsecEff/F");
    TBranch *b_deltaR_minBB          = outputTree->Branch("deltaR_minBB",&deltaR_minBB,"deltaR_minBB/F");
    TBranch *b_aveBBdr               = outputTree->Branch("aveBBdr",&aveBBdr,"aveBBdr/F");
    TBranch *b_deltaEta_maxBB        = outputTree->Branch("deltaEta_maxBB",&deltaEta_maxBB,"deltaEta_maxBB/F");  
@@ -904,6 +905,7 @@ void step2::Loop()
 //////////////////////////////////////////////////////////////////////////////////     	  
 	  
 	  b_isTraining->Fill();
+          b_xsecEff->Fill();
 	  b_deltaR_minBB->Fill();
 	  b_aveBBdr->Fill();
 	  b_deltaEta_maxBB->Fill();
