@@ -40,11 +40,11 @@ import varsList
 
 # --------------------------------------------
 #weight and cut strings below are used for both background and signals!
-weightStrC = "pileupWeight*lepIdSF*EGammaGsfSF*MCWeight_singleLepCalc/abs(MCWeight_singleLepCalc)"
+weightStrC = "xsecEff*pileupWeight*lepIdSF*EGammaGsfSF*((MCWeight_singleLepCalc)/abs(MCWeight_singleLepCalc))*topPtWeight13TeV" #assuming we just train on TT bkg, otherwise we will need a loop so that we can apply different weights for different bkg samples
 weightStrS = weightStrC
 weightStrB = weightStrC
 
-cutStrC = "(NJets_JetSubCalc >= 5 && NJetsCSV_JetSubCalc >= 2) && ((leptonPt_singleLepCalc > 35 && isElectron) || (leptonPt_singleLepCalc > 30 && isMuon))"
+cutStrC = "(NJets_JetSubCalc >= 4 && NJetsCSV_JetSubCalc >= 1) && ((leptonPt_singleLepCalc > 35 && isElectron) || (leptonPt_singleLepCalc > 30 && isMuon))"
 cutStrS = cutStrC+" && ( isTraining == 1 || isTraining == 2 )"
 cutStrB = cutStrC
 

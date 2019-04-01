@@ -171,6 +171,7 @@ void step2::Loop()
    TTree *outputTree = inputTree->CloneTree(); //Copy of Input Tree
 //    TTree *outputTree = new TTree("ljmet","ljmet"); //No Copy of Input Tree   
    TBranch *b_isTraining            = outputTree->Branch("isTraining",&isTraining,"isTraining/I");
+   TBranch *b_xsecEff               = outputTree->Branch("xsecEff",&xsecEff,"xsecEff/F");
    TBranch *b_deltaR_minBB          = outputTree->Branch("deltaR_minBB",&deltaR_minBB,"deltaR_minBB/F");
    TBranch *b_aveBBdr               = outputTree->Branch("aveBBdr",&aveBBdr,"aveBBdr/F");
    TBranch *b_deltaEta_maxBB        = outputTree->Branch("deltaEta_maxBB",&deltaEta_maxBB,"deltaEta_maxBB/F");  
@@ -432,7 +433,8 @@ void step2::Loop()
 
 
      for(unsigned int ijet = 0; ijet < theJetPt_JetSubCalc_PtOrdered->size(); ijet++){
-		if(theJetCSVb_JetSubCalc_PtOrdered->at(ijet)+theJetCSVbb_JetSubCalc_PtOrdered->at(ijet) < 0.4941){
+		if(theJetCSVb_JetSubCalc_PtOrdered->at(ijet)+theJetCSVbb_JetSubCalc_PtOrdered->at(ijet) > 0.4941){
+		   //changed to > in line above because we want jets that pass the csv cut 
 		   njetscsv+=1;
 		   totalPtCSV += theJetPt_JetSubCalc_PtOrdered->at(ijet);
 		   aveCSVpt += (theJetCSVb_JetSubCalc_PtOrdered->at(ijet)+theJetCSVbb_JetSubCalc_PtOrdered->at(ijet))*theJetPt_JetSubCalc_PtOrdered->at(ijet);
@@ -904,6 +906,7 @@ void step2::Loop()
 //////////////////////////////////////////////////////////////////////////////////     	  
 	  
 	  b_isTraining->Fill();
+          b_xsecEff->Fill();
 	  b_deltaR_minBB->Fill();
 	  b_aveBBdr->Fill();
 	  b_deltaEta_maxBB->Fill();
@@ -997,6 +1000,12 @@ void step2::Loop()
 
       b_Sphericity->Fill(); 
       b_Aplanarity->Fill(); 
+      b_pT_3rdcsvJet->Fill(); //added 31 March 2019
+      b_pT_4thcsvJet->Fill(); //added 31 March 2019
+      b_pt3HT->Fill();       // added 31 March 2019
+      b_pt4HT->Fill();      // added 31 March 2019
+      b_MT2bb->Fill();     // added 31 March 2019
+      b_minMleppJet->Fill(); //added 31 March 2019 //this is minimum lep jet mass for any jet, not specifically light
 		  
    }
 std::cout<<"DONE "<<nentries<<std::endl;   

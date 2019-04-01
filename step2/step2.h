@@ -28,7 +28,7 @@ public :
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
    Int_t           isTraining;
-   
+   Float_t         xsecEff; //this is the weight actually!! so (Lumi * xsec)/nEvents, but keeping the naming the same to be consistent with Jangbae
    // Declaration of leaf types
    Long64_t        event_CommonCalc;
    Int_t           run_CommonCalc;
@@ -354,7 +354,36 @@ public :
 
 #ifdef step2_cxx
 step2::step2(TString inputFileName, TString outputFileName)// : inputTree(0), inputFile(0), outputFile(0) 
-{
+{   //weight branches to be used in the BDT training, xsecEff is the weight
+
+   // TT bkg divided into TTToSemiLep, TTToHadronic, TT high mass appear below
+
+   //TTToSemiLep
+   if (inputFileName.Contains("TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt0to700")) xsecEff = 0.124965227182;
+   else if (inputFileName.Contains("TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf")) xsecEff = 0.0390353547886;
+   else if (inputFileName.Contains("TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000")) xsecEff = 0.0489916774424;
+   
+   //TTToHadronic
+   else if (inputFileName.Contains("TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt0to700")) xsecEff = 0.116142042796;
+   else if (inputFileName.Contains("TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf")) xsecEff = 0.038130503147;
+   else if (inputFileName.Contains("TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000")) xsecEff = 0.0475747565755;
+   
+   //TTTo2l2nu
+   else if (inputFileName.Contains("TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt0to700")) xsecEff = 0.0405145175674;
+   else if (inputFileName.Contains("TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf")) xsecEff = 0.023641731379;
+   else if (inputFileName.Contains("TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000")) xsecEff = 0.0269600535667;
+   
+   //TT high mass 
+   else if (inputFileName.Contains("TT_Mtt-1000toInf_TuneCP5_13TeV-powheg-pythia8")) xsecEff = 0.0375769188266;
+   else if (inputFileName.Contains("TT_Mtt-700to1000_TuneCP5_13TeV-powheg-pythia8")) xsecEff = 0.0467160733391;
+   
+   //TTTT signal below
+   
+   else if (inputFileName.Contains("TTTT_TuneCP5_13TeV-amcatnlo-pythia8")) xsecEff = 0.041298;
+   
+   //For everything else, just have this branch be dummy at the moment, 1 will do nothing
+   else xsecEff = 1.0;
+   
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
 //    if (tree == 0) {
