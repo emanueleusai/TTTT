@@ -62,10 +62,10 @@ public :
    vector<double>  *theJetEta_JetSubCalc_PtOrdered;
    vector<double>  *theJetPhi_JetSubCalc_PtOrdered;
    vector<double>  *theJetEnergy_JetSubCalc_PtOrdered;
-   vector<double>  *theJetCSVb_JetSubCalc_PtOrdered;
-   vector<double>  *theJetCSVbb_JetSubCalc_PtOrdered;
-   vector<double>  *theJetCSVc_JetSubCalc_PtOrdered;
-   vector<double>  *theJetCSVudsg_JetSubCalc_PtOrdered;
+   vector<double>  *theJetDeepCSVb_JetSubCalc_PtOrdered;
+   vector<double>  *theJetDeepCSVbb_JetSubCalc_PtOrdered;
+   vector<double>  *theJetDeepCSVc_JetSubCalc_PtOrdered;
+   vector<double>  *theJetDeepCSVudsg_JetSubCalc_PtOrdered;
    vector<int>     *theJetHFlav_JetSubCalc_PtOrdered;
    vector<int>     *theJetPFlav_JetSubCalc_PtOrdered;
    vector<int>     *theJetBTag_JetSubCalc_PtOrdered;
@@ -134,18 +134,41 @@ public :
    Int_t           NJetsTtagged_0p81;
    Float_t         minDR_leadAK8otherAK8;
    Float_t         minDR_lepAK8;
-   Float_t         GD_DR_Tridijet;
+   vector<double>  GD_DR_Tridijet;
    vector<double>  BD_DR_Tridijet;   
-   Float_t         GD_Ttrijet_TopMass;
+   vector<double>  GD_Ttrijet_TopMass;
    vector<double>  BD_Ttrijet_TopMass;
-   Float_t         GD_Mass_minDR_dijet;
+   vector<double>  GD_Mass_minDR_dijet;
    vector<double>  BD_Mass_minDR_dijet;
-   Float_t         GD_pTrat;
+   vector<double>  GD_pTrat;
    vector<double>  BD_pTrat;
-   Float_t         GD_DR_Trijet_jetNotdijet;
+   vector<double>  GD_DR_Trijet_jetNotdijet;
    vector<double>  BD_DR_Trijet_jetNotdijet;  
    vector<double>  *deltaR_lepAK8s;
    vector<double>  deltaPhi_METjets;
+   Float_t         nGD_trijet;
+   Float_t         is_genMissingDaughter;
+   Float_t         is_genFourTopsOnelepton;
+
+
+
+   vector<double>  *topPt_TTbarMassCalc;
+   vector<double>  *topEta_TTbarMassCalc;
+   vector<double>  *topPhi_TTbarMassCalc;
+   vector<double>  *topEnergy_TTbarMassCalc;         
+
+   vector<double>  *topWID_TTbarMassCalc;
+   vector<double>  *topWPt_TTbarMassCalc;
+   vector<double>  *topWEta_TTbarMassCalc;
+   vector<double>  *topWPhi_TTbarMassCalc;
+   vector<double>  *topWEnergy_TTbarMassCalc;
+
+   vector<double>  *topbID_TTbarMassCalc;
+   vector<double>  *topbPt_TTbarMassCalc;
+   vector<double>  *topbEta_TTbarMassCalc;
+   vector<double>  *topbPhi_TTbarMassCalc;
+   vector<double>  *topbEnergy_TTbarMassCalc;         
+
    
    //Additional Variables from the charged higgs analysis
    Float_t         minBBdr;
@@ -191,7 +214,7 @@ public :
    Float_t         Sphericity;
    Float_t         Aplanarity;
    Float_t         deltaR_lepbJetNotInMinMlb;
-   Float_t         GD_DCSV_jetNotdijet;
+   vector<double>  GD_DCSV_jetNotdijet;
    vector<double>  BD_DCSV_jetNotdijet;   
       
    Float_t         mass_minBBdr;   
@@ -266,10 +289,10 @@ public :
    TBranch        *b_theJetEta_JetSubCalc_PtOrdered;   //!
    TBranch        *b_theJetPhi_JetSubCalc_PtOrdered;   //!
    TBranch        *b_theJetEnergy_JetSubCalc_PtOrdered;   //!
-   TBranch        *b_theJetCSVb_JetSubCalc_PtOrdered;   //!
-   TBranch        *b_theJetCSVbb_JetSubCalc_PtOrdered;   //!
-   TBranch        *b_theJetCSVc_JetSubCalc_PtOrdered;   //!
-   TBranch        *b_theJetCSVudsg_JetSubCalc_PtOrdered;   //!
+   TBranch        *b_theJetDeepCSVb_JetSubCalc_PtOrdered;   //!
+   TBranch        *b_theJetDeepCSVbb_JetSubCalc_PtOrdered;   //!
+   TBranch        *b_theJetDeepCSVc_JetSubCalc_PtOrdered;   //!
+   TBranch        *b_theJetDeepCSVudsg_JetSubCalc_PtOrdered;   //!
    TBranch        *b_theJetHFlav_JetSubCalc_PtOrdered;   //!
    TBranch        *b_theJetPFlav_JetSubCalc_PtOrdered;   //!
    TBranch        *b_theJetBTag_JetSubCalc_PtOrdered;   //!
@@ -339,6 +362,24 @@ public :
    TBranch        *b_minDR_lepAK8;   //!
    TBranch        *b_deltaR_lepAK8s;   //!
 
+   TBranch        *b_topPt_TTbarMassCalc;
+   TBranch        *b_topEta_TTbarMassCalc;
+   TBranch        *b_topPhi_TTbarMassCalc;
+   TBranch        *b_topEnergy_TTbarMassCalc;         
+
+   TBranch        *b_topWID_TTbarMassCalc;
+   TBranch        *b_topWPt_TTbarMassCalc;
+   TBranch        *b_topWEta_TTbarMassCalc;
+   TBranch        *b_topWPhi_TTbarMassCalc;
+   TBranch        *b_topWEnergy_TTbarMassCalc;
+
+   TBranch        *b_topbID_TTbarMassCalc;
+   TBranch        *b_topbPt_TTbarMassCalc;
+   TBranch        *b_topbEta_TTbarMassCalc;
+   TBranch        *b_topbPhi_TTbarMassCalc;
+   TBranch        *b_topbEnergy_TTbarMassCalc;         
+
+
    step2(TString inputFileName, TString outputFileName);
    virtual ~step2();
    virtual Int_t    Cut(Long64_t entry);
@@ -359,31 +400,31 @@ step2::step2(TString inputFileName, TString outputFileName)// : inputTree(0), in
    // TT bkg divided into TTToSemiLep, TTToHadronic, TT high mass appear below
 
    //TTToSemiLep
-   if (inputFileName.Contains("TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt0to700")) xsecEff = 0.124965227182;
-   else if (inputFileName.Contains("TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf")) xsecEff = 0.0390353547886;
-   else if (inputFileName.Contains("TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000")) xsecEff = 0.0489916774424;
+   if (inputFileName.Contains("TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt0to700")) xsecEff = 0.137784841012;
+   else if (inputFileName.Contains("TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf")) xsecEff = 0.0309363357165;
+   else if (inputFileName.Contains("TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000")) xsecEff = 0.0514566653858;
    
    //TTToHadronic
-   else if (inputFileName.Contains("TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt0to700")) xsecEff = 0.116142042796;
-   else if (inputFileName.Contains("TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf")) xsecEff = 0.038130503147;
-   else if (inputFileName.Contains("TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000")) xsecEff = 0.0475747565755;
+   else if (inputFileName.Contains("TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt0to700")) xsecEff =  0.121490806141;
+   else if (inputFileName.Contains("TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf")) xsecEff = 0.030031985381;
+   else if (inputFileName.Contains("TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000")) xsecEff = 0.0490022856079;
    
    //TTTo2l2nu
-   else if (inputFileName.Contains("TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt0to700")) xsecEff = 0.0405145175674;
-   else if (inputFileName.Contains("TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf")) xsecEff = 0.023641731379;
-   else if (inputFileName.Contains("TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000")) xsecEff = 0.0269600535667;
+   else if (inputFileName.Contains("TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt0to700")) xsecEff = 0.0525799344238;
+   else if (inputFileName.Contains("TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf")) xsecEff = 0.0226832371713;
+   else if (inputFileName.Contains("TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000")) xsecEff = 0.0320566270444;
    
    //TT high mass 
-   else if (inputFileName.Contains("TT_Mtt-1000toInf_TuneCP5_13TeV-powheg-pythia8")) xsecEff = 0.0375769188266;
-   else if (inputFileName.Contains("TT_Mtt-700to1000_TuneCP5_13TeV-powheg-pythia8")) xsecEff = 0.0467160733391;
+   else if (inputFileName.Contains("TT_Mtt-1000toInf_TuneCP5_PSweights_13TeV-powheg-pythia8")) xsecEff = 0.0294081434678;
+   else if (inputFileName.Contains("TT_Mtt-700to1000_TuneCP5_13TeV-powheg-pythia8")) xsecEff = 0.0473629131251;
    
    //TTTT signal below
    
-   else if (inputFileName.Contains("TTTT_TuneCP5_13TeV-amcatnlo-pythia8")) xsecEff = 0.041298;
+   else if (inputFileName.Contains("TTTT_TuneCP5_PSweights_13TeV-amcatnlo-pythia8")) xsecEff = 0.0485879401951;
    
    //For everything else, just have this branch be dummy at the moment, 1 will do nothing
    else xsecEff = 1.0;
-   
+      
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
 //    if (tree == 0) {
@@ -444,10 +485,10 @@ void step2::Init(TTree *tree)
    theJetEta_JetSubCalc_PtOrdered = 0;
    theJetPhi_JetSubCalc_PtOrdered = 0;
    theJetEnergy_JetSubCalc_PtOrdered = 0;
-   theJetCSVb_JetSubCalc_PtOrdered = 0;
-   theJetCSVbb_JetSubCalc_PtOrdered = 0;
-   theJetCSVc_JetSubCalc_PtOrdered = 0;
-   theJetCSVudsg_JetSubCalc_PtOrdered = 0;
+   theJetDeepCSVb_JetSubCalc_PtOrdered = 0;
+   theJetDeepCSVbb_JetSubCalc_PtOrdered = 0;
+   theJetDeepCSVc_JetSubCalc_PtOrdered = 0;
+   theJetDeepCSVudsg_JetSubCalc_PtOrdered = 0;
    theJetHFlav_JetSubCalc_PtOrdered = 0;
    theJetPFlav_JetSubCalc_PtOrdered = 0;
    theJetBTag_JetSubCalc_PtOrdered = 0;
@@ -481,6 +522,24 @@ void step2::Init(TTree *tree)
    theJetAK8Tmatch_JetSubCalc_PtOrdered = 0;
    theJetAK8MatchedPt_JetSubCalc_PtOrdered = 0;
    deltaR_lepAK8s = 0;
+
+   topPt_TTbarMassCalc = 0;
+   topEta_TTbarMassCalc = 0;
+   topPhi_TTbarMassCalc = 0;
+   topEnergy_TTbarMassCalc = 0;
+
+   topWID_TTbarMassCalc = 0;
+   topWPt_TTbarMassCalc = 0;
+   topWEta_TTbarMassCalc = 0;
+   topWPhi_TTbarMassCalc = 0;
+   topWEnergy_TTbarMassCalc = 0;
+
+   topbID_TTbarMassCalc = 0;
+   topbPt_TTbarMassCalc = 0;
+   topbEta_TTbarMassCalc = 0;
+   topbPhi_TTbarMassCalc = 0;
+   topbEnergy_TTbarMassCalc = 0;
+
    // Set branch addresses and branch pointers
    if (!tree) return;
    inputTree = tree;
@@ -519,10 +578,10 @@ void step2::Init(TTree *tree)
    inputTree->SetBranchAddress("theJetEta_JetSubCalc_PtOrdered", &theJetEta_JetSubCalc_PtOrdered, &b_theJetEta_JetSubCalc_PtOrdered);
    inputTree->SetBranchAddress("theJetPhi_JetSubCalc_PtOrdered", &theJetPhi_JetSubCalc_PtOrdered, &b_theJetPhi_JetSubCalc_PtOrdered);
    inputTree->SetBranchAddress("theJetEnergy_JetSubCalc_PtOrdered", &theJetEnergy_JetSubCalc_PtOrdered, &b_theJetEnergy_JetSubCalc_PtOrdered);
-   inputTree->SetBranchAddress("theJetCSVb_JetSubCalc_PtOrdered", &theJetCSVb_JetSubCalc_PtOrdered, &b_theJetCSVb_JetSubCalc_PtOrdered);
-   inputTree->SetBranchAddress("theJetCSVbb_JetSubCalc_PtOrdered", &theJetCSVbb_JetSubCalc_PtOrdered, &b_theJetCSVbb_JetSubCalc_PtOrdered);
-   inputTree->SetBranchAddress("theJetCSVc_JetSubCalc_PtOrdered", &theJetCSVc_JetSubCalc_PtOrdered, &b_theJetCSVc_JetSubCalc_PtOrdered);
-   inputTree->SetBranchAddress("theJetCSVudsg_JetSubCalc_PtOrdered", &theJetCSVudsg_JetSubCalc_PtOrdered, &b_theJetCSVudsg_JetSubCalc_PtOrdered);
+   inputTree->SetBranchAddress("theJetDeepCSVb_JetSubCalc_PtOrdered", &theJetDeepCSVb_JetSubCalc_PtOrdered, &b_theJetDeepCSVb_JetSubCalc_PtOrdered);
+   inputTree->SetBranchAddress("theJetDeepCSVbb_JetSubCalc_PtOrdered", &theJetDeepCSVbb_JetSubCalc_PtOrdered, &b_theJetDeepCSVbb_JetSubCalc_PtOrdered);
+   inputTree->SetBranchAddress("theJetDeepCSVc_JetSubCalc_PtOrdered", &theJetDeepCSVc_JetSubCalc_PtOrdered, &b_theJetDeepCSVc_JetSubCalc_PtOrdered);
+   inputTree->SetBranchAddress("theJetDeepCSVudsg_JetSubCalc_PtOrdered", &theJetDeepCSVudsg_JetSubCalc_PtOrdered, &b_theJetDeepCSVudsg_JetSubCalc_PtOrdered);
    inputTree->SetBranchAddress("theJetHFlav_JetSubCalc_PtOrdered", &theJetHFlav_JetSubCalc_PtOrdered, &b_theJetHFlav_JetSubCalc_PtOrdered);
    inputTree->SetBranchAddress("theJetPFlav_JetSubCalc_PtOrdered", &theJetPFlav_JetSubCalc_PtOrdered, &b_theJetPFlav_JetSubCalc_PtOrdered);
    inputTree->SetBranchAddress("theJetBTag_JetSubCalc_PtOrdered", &theJetBTag_JetSubCalc_PtOrdered, &b_theJetBTag_JetSubCalc_PtOrdered);
@@ -594,6 +653,25 @@ void step2::Init(TTree *tree)
    inputTree->SetBranchAddress("minDR_leadAK8otherAK8", &minDR_leadAK8otherAK8, &b_minDR_leadAK8otherAK8);
    inputTree->SetBranchAddress("minDR_lepAK8", &minDR_lepAK8, &b_minDR_lepAK8);
    inputTree->SetBranchAddress("deltaR_lepAK8s", &deltaR_lepAK8s, &b_deltaR_lepAK8s);
+
+   inputTree->SetBranchAddress("topPt_TTbarMassCalc", &topPt_TTbarMassCalc, &b_topPt_TTbarMassCalc);
+   inputTree->SetBranchAddress("topEta_TTbarMassCalc", &topEta_TTbarMassCalc, &b_topEta_TTbarMassCalc);
+   inputTree->SetBranchAddress("topPhi_TTbarMassCalc", &topPhi_TTbarMassCalc, &b_topPhi_TTbarMassCalc);
+   inputTree->SetBranchAddress("topEnergy_TTbarMassCalc", &topEnergy_TTbarMassCalc, &b_topEnergy_TTbarMassCalc);
+
+   inputTree->SetBranchAddress("topWID_TTbarMassCalc", &topWID_TTbarMassCalc, &b_topWID_TTbarMassCalc);
+   inputTree->SetBranchAddress("topWPt_TTbarMassCalc", &topWPt_TTbarMassCalc, &b_topWPt_TTbarMassCalc);
+   inputTree->SetBranchAddress("topWEta_TTbarMassCalc", &topWEta_TTbarMassCalc, &b_topWEta_TTbarMassCalc);
+   inputTree->SetBranchAddress("topWPhi_TTbarMassCalc", &topWPhi_TTbarMassCalc, &b_topWPhi_TTbarMassCalc);
+   inputTree->SetBranchAddress("topWEnergy_TTbarMassCalc", &topWEnergy_TTbarMassCalc, &b_topWEnergy_TTbarMassCalc);
+
+   inputTree->SetBranchAddress("topbID_TTbarMassCalc", &topbID_TTbarMassCalc, &b_topbID_TTbarMassCalc);      
+   inputTree->SetBranchAddress("topbPt_TTbarMassCalc", &topbPt_TTbarMassCalc, &b_topbPt_TTbarMassCalc);
+   inputTree->SetBranchAddress("topbEta_TTbarMassCalc", &topbEta_TTbarMassCalc, &b_topbEta_TTbarMassCalc);
+   inputTree->SetBranchAddress("topbPhi_TTbarMassCalc", &topbPhi_TTbarMassCalc, &b_topbPhi_TTbarMassCalc);
+   inputTree->SetBranchAddress("topbEnergy_TTbarMassCalc", &topbEnergy_TTbarMassCalc, &b_topbEnergy_TTbarMassCalc);
+
+
    Notify();
 }
 
