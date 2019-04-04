@@ -44,9 +44,9 @@ weightStrC = "xsecEff*pileupWeight*lepIdSF*EGammaGsfSF*((MCWeight_singleLepCalc)
 weightStrS = weightStrC
 weightStrB = weightStrC
 
-cutStrC = "(NJets_JetSubCalc >= 4 && NJetsCSV_JetSubCalc >= 1) && ((leptonPt_singleLepCalc > 35 && isElectron) || (leptonPt_singleLepCalc > 30 && isMuon))"
+cutStrC = "(NJets_JetSubCalc >= 7 && NJetsCSV_JetSubCalc >= 3) && ((leptonPt_singleLepCalc > 35 && isElectron) || (leptonPt_singleLepCalc > 30 && isMuon)) && (corr_met_singleLepCalc > 60) && (MT_lepMet > 60) && (AK4HT > 300)"
 cutStrS = cutStrC+" && ( isTraining == 1 || isTraining == 2 )"
-cutStrB = cutStrC
+cutStrB = cutStrC+" && ( isTraining == 1 || isTraining == 2 )"
 
 
 # Default settings for command line arguments
