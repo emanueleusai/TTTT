@@ -1,0 +1,13 @@
+universe = vanilla
+Executable = /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/step2/makeStep2.sh
+Should_Transfer_Files = YES
+WhenToTransferOutput = ON_EXIT
+request_memory = 3072
+Transfer_Input_Files = /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/step2/makeStep2.C, /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/step2/step2.cc, /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/step2/step2.h, /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/step2/step2_cc.d, /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/step2/step2_cc.so, /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/step2/Davismt2.cc, /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/step2/Davismt2.h, /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/step2/Davismt2_cc.d, /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/step2/Davismt2_cc.so
+Output = TTTT_TuneCP5_13TeV-amcatnlo-pythia8_hadd.out
+Error = TTTT_TuneCP5_13TeV-amcatnlo-pythia8_hadd.err
+Log = TTTT_TuneCP5_13TeV-amcatnlo-pythia8_hadd.log
+Notification = Never
+Arguments = TTTT_TuneCP5_13TeV-amcatnlo-pythia8_hadd.root TTTT_TuneCP5_13TeV-amcatnlo-pythia8_hadd.root /mnt/hadoop/users/ssagir/LJMet94X_1lepTT_020619_step1hadds/nominal/ /mnt/hadoop/users/jlee/TTTT/LJMet94X_1lepTT_022219_step2/nominal/
+
+Queue 1

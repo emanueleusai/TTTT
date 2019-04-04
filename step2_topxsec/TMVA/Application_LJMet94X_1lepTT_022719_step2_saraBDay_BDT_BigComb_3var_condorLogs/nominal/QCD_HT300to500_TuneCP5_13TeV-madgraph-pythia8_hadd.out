@@ -1,0 +1,17 @@
+
+Processing /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/TMVA/ApplicationLJMet94X_1lepTT_022719_step2_saraBDay_BDT_BigComb_3var_condorLogs/nominal//TMVAClassificationApplication.C("BDT","/isilon/hadoop/store/user/mhadley/TTTT/LJMet94X_1lepTT_022719_step2_saraBDay/nominal//QCD_HT300to500_TuneCP5_13TeV-madgraph-pythia8_hadd.root","QCD_HT300to500_TuneCP5_13TeV-madgraph-pythia8_hadd.root")...
+
+==> Start TMVAClassificationApplication
+                         : Booking "BDT method" of type "BDT" from /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/TMVA/dataset/weights/BDT_BigComb_3vars_mDepth2/TMVAClassification_BDT.weights.xml.
+                         : Reading weight file: /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/TMVA/dataset/weights/BDT_BigComb_3vars_mDepth2/TMVAClassification_BDT.weights.xml
+<HEADER> DataSetInfo              : [Default] : Added class "Signal"
+<HEADER> DataSetInfo              : [Default] : Added class "Background"
+                         : Booked classifier "BDT" of type: "BDT"
+--- TMVAClassificationApp    : Using input file: /isilon/hadoop/store/user/mhadley/TTTT/LJMet94X_1lepTT_022719_step2_saraBDay/nominal//QCD_HT300to500_TuneCP5_13TeV-madgraph-pythia8_hadd.root
+--- Select signal sample
+--- Processing: 882 events
+--- ... Processing event: 0
+--- End of event loop: Real time 0:00:00, CP time 0.150
+--- Created root file: "TMVApp.root" containing the MVA output histograms
+==> TMVAClassificationApplication is done!
+
