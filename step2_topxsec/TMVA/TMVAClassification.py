@@ -189,7 +189,7 @@ def main():
     # input variables, the response values of all trained MVAs, and the spectator variables
 
     inputDir = varsList.inputDir
-    infname = "TTTT_TuneCP5_13TeV-amcatnlo-pythia8_hadd.root"
+    infname = "TTTT_TuneCP5_PSweights_13TeV-amcatnlo-pythia8_hadd.root"
     iFileSig = TFile.Open(inputDir+infname)
     sigChain = iFileSig.Get("ljmet")
 

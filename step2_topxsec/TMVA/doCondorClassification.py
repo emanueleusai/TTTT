@@ -1,7 +1,7 @@
 import os,sys
 import varsList
 
-nTrees = '100'
+nTrees = '1000'
 BDTlist = ['BDT']
 varListKeys = ['BigComb']
 runDir=os.getcwd()
@@ -11,7 +11,7 @@ note=''
 count=0
 for method in BDTlist:
     for vListKey in varListKeys:
-        for mDepth in ['2']:
+        for mDepth in ['3']:
             count+=1
             fileName = method+'_'+vListKey+'_'+str(len(varsList.varList[vListKey]))+'vars_mDepth'+mDepth+note
             dict={'RUNDIR':runDir,'FILENAME':fileName,'METHOD':method,'vListKey':vListKey,'mDepth':mDepth,'nTrees':nTrees}

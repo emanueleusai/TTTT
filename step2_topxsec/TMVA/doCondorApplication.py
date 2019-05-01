@@ -5,20 +5,17 @@ shift = sys.argv[1]
 BDT = 'BDT'
 
 varListKey = 'BigComb'
-#templateFile = '/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/TMVA/TMVAClassificationApplication_template.C'
-templateFile = '/home/mhadley/testBDTFromJangbae/CMSSW_9_4_6_patch1/src/TTTT/TMVA/TMVAClassificationApplication_template.C'
+templateFile = '/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/TMVA/TMVAClassificationApplication_template.C'
 # massList = ['Low1','Low2']
-#weightFile = '/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/TMVA/dataset/weights/'
-weightFile = '/home/mhadley/testBDTFromJangbae/CMSSW_9_4_6_patch1/src/TTTT/TMVA/dataset/weights/'
-weightFile+= BDT+'_BigComb_3vars_mDepth2/TMVAClassification_'+BDT+'.weights.xml'
+weightFile = '/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/step2_topxsec/TMVA/dataset/weights/'
+weightFile+= BDT+'_BigComb_54vars_mDepth3/TMVAClassification_'+BDT+'.weights.xml'
 
 #IO directories must be full paths
-#relbase   = '/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/'
-relbase = '/home/mhadley/testBDTFromJangbae/CMSSW_9_4_6_patch1/'
+relbase   = '/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/'
 
-inputDir  = '/isilon/hadoop/store/user/mhadley/TTTT/LJMet94X_1lepTT_022719_step2_saraBDay'
-#outputDir = '/isilon/hadoop/store/user/jblee/TTTT/LJMet94X_1lepTT_022719_step2_saraBDay_'+BDT+'_BigComb_3var/'+shift+'/'
-outputDir = '/isilon/hadoop/store/user/mhadley/LJMet94X_1lepTT_022719_step2_saraBDay_'+BDT+'_BigComb_3var/'+shift+'/'
+# inputDir  = '/isilon/hadoop/store/user/mhadley/TTTT/LJMet94X_1lepTT_022719_step2_saraBDay'
+inputDir  = '/mnt/hadoop/users/mhadley/TTTT/LJMet94X_1lep_040419_step2UpdatedFromJangbae/'
+outputDir = '/isilon/hadoop/store/user/jblee/TTTT/LJMet94X_1lep_040419_step2UpdatedFromJangbae_'+BDT+'_BigComb_54var/'+shift+'/'
 
 
 inputDir += '/'+shift+'/'
@@ -62,7 +59,7 @@ os.system('mkdir -p '+outputDir)
 count=0
 for file in rootfiles:
     if '.root' not in file: continue
-    if 'QCD_HT300to500_TuneCP5' not in file: continue
+#     if 'TTTT' not in file: continue
     rawname = file[:-6]
     print file
     count+=1
