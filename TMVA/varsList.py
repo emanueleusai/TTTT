@@ -51,7 +51,7 @@ varList['BigComb'] = [
 # ['minDR_lepJet','min[#DeltaR(l,j)]',''],
 # ['lepDR_minBBdr','#DeltaR(l,bb) with min[#DeltaR(b,b)]',''],
 # ['BJetLeadPt','p_{T}(b_{1})','GeV'],
-# ['aveBBdr','ave[#DeltaR(b,b)]',''],
+['aveBBdr','ave[#DeltaR(b,b)]',''],
 # ['mass_maxBBpt','M(b,b) with max[p_{T}(b,b)]','GeV'],
 # ['mass_maxBBmass','max[M(b,b)]','GeV'],
 # ['mass_maxJJJpt','M(jjj) with max[p_{T}(jjj)]','GeV'],
@@ -77,7 +77,7 @@ varList['BigComb'] = [
 # ['mass_lepBJet0','M(l,b_{1})','GeV'],
 # ['mass_lepBB_minBBdr','M(l,bb) with min[#DeltaR(b,b)]','GeV'],
 # ['PtFifthJet','5^{th} jet p_{T}','GeV'],
-# ['aveCSVpt','p_{T} weighted CSVv2',''],
+['aveCSVpt','p_{T} weighted CSVv2',''],
 ['FW_momentum_2','2^{nd} FW moment','GeV'],
 # ['corr_met','E_{T}^{miss}','GeV'],
 ]

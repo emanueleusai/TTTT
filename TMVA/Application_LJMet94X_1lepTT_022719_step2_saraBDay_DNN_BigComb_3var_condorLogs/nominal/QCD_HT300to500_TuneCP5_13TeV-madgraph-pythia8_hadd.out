@@ -1,0 +1,6 @@
+
+Processing /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/TMVA/Application_LJMet94X_1lepTT_022719_step2_saraBDay_DNN_BigComb_3var_condorLogs/nominal//TMVAClassificationApplication.C("DNN","/isilon/hadoop/store/user/mhadley/TTTT/LJMet94X_1lepTT_022719_step2_saraBDay/nominal//QCD_HT300to500_TuneCP5_13TeV-madgraph-pythia8_hadd.root","QCD_HT300to500_TuneCP5_13TeV-madgraph-pythia8_hadd.root")...
+
+==> Start TMVAClassificationApplication
+Method "DNN" not known in TMVA under this name. Choose among the following:
+BDT BDTB BDTD BDTG BoostedFisher CFMlpANN Category Cuts CutsD CutsGA CutsPCA CutsSA DNN_CPU FDA_GA FDA_GAMT FDA_MC FDA_MCMT FDA_MT FDA_SA Fisher FisherG HMatrix KNN LD Likelihood LikelihoodD LikelihoodKDE LikelihoodMIX LikelihoodPCA MLP MLPBFGS MLPBNN PDEFoam PDEFoamBoost PDERS PDERSD PDERSPCA Plugin RuleFit SVM SVM_Gauss SVM_Lin SVM_Poly TMlpANN 

@@ -247,7 +247,7 @@ def main():
     # "SplitMode=Random" means that the input events are randomly shuffled before
     # splitting them into training and test samples
     loader.PrepareTrainingAndTestTree( mycutSig, mycutBkg,
-                                        "nTrain_Signal=0:nTrain_Background=0:SplitMode=Random:NormMode=NumEvents:!V" )
+                                        "nTrain_Signal=1000:nTrain_Background=1000:nTest_Signal=500:nTest_Background=500:SplitMode=Random:NormMode=NumEvents:!V" )
 
     # --------------------------------------------------------------------------------------------------
 
@@ -296,22 +296,29 @@ def main():
     # ---- Now you can tell the loader to train, test, and evaluate the MVAs. 
 
     # Train MVAs
-    print "train all method"
-    factory.TrainAllMethods()
+#     print "train all method"
+#     factory.TrainAllMethods()
 
-    print "test all method"
+#     print "test all method"
     # Test MVAs
-    factory.TestAllMethods()
+#     factory.TestAllMethods()
     
     # Evaluate MVAs
-    factory.EvaluateAllMethods()    
-
+#     factory.EvaluateAllMethods()    
+    vi = TMVA.VariableImportance(loader)
+    vi.BookMethod(TMVA.Types.kBDT,"BDT",bdtSetting)
+    vi.SetType(TMVA.kShort)
+    vi.Evaluate()
+    results=vi.GetResults()
+    results.Print()
+    results.Draw()
+    raw_input() 
     # Save the output.
     outputFile.Close()
     # save plots:
     os.chdir('dataset/weights/'+Note)
 
-    if not gROOT.IsBatch(): TMVA.TMVAGui( outfname )
+#     if not gROOT.IsBatch(): TMVA.TMVAGui( outfname )
     print "DONE"
 
 if __name__ == "__main__":
