@@ -1,0 +1,11 @@
+universe = vanilla
+Executable = /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/singleLepAnalyzer/makeTemplates/kinematics_PS_2019_5_1/E_nT0p_nW0p_nB1p_nJ4p/ET0pW0pB1pJ4pHT.sh
+Should_Transfer_Files = YES
+WhenToTransferOutput = ON_EXIT
+request_memory = 3072
+Output = condor_HT.out
+Error = condor_HT.err
+Log = condor_HT.log
+Notification = Error
+Arguments = /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/singleLepAnalyzer/makeTemplates/ HT PS 0 E 0p 0p 1p 4p
+Queue 1

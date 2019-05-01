@@ -1,0 +1,9 @@
+You are trying to build/setup tools for SCRAM_ARCH slc7_amd64_gcc493.
+while your project area is currently setup for following SCRAM_ARCH(s):
+	slc7_amd64_gcc630
+	slc6_amd64_gcc630
+Please make sure your SCRAM_ARCH environment variable is correct.
+Traceback (most recent call last):
+  File "doHists.py", line 4, in <module>
+    from ROOT import TH1D,gROOT,TFile,TTree
+ImportError: No module named ROOT
