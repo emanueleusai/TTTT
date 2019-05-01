@@ -9,9 +9,11 @@ shift = sys.argv[1]
 foldnum = '-1'
 #relbase   = '/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/'
 relbase    = '/home/mhadley/testBDTFromJangbae/CMSSW_9_4_6_patch1'
-inputDir  = '/mnt/hadoop/users/ssagir/LJMet94X_1lepTT_020619_step1hadds/'+shift+'/'
+#inputDir  = '/mnt/hadoop/users/ssagir/LJMet94X_1lepTT_020619_step1hadds/'+shift+'/'
+inputDir = '/mnt/hadoop/users/mhadley/TTTT/LJMet94X_1lep_033119_step1hadds/'+shift+'/'
 #outputDir = '/mnt/hadoop/users/jlee/TTTT/LJMet94X_1lepTT_022219_step2/'+shift+'/'
-outputDir = '/mnt/hadoop/users/mhadley/TTTT/LJMet94X_1lepTT_032719_step2/'+shift+'/'
+#outputDir = '/mnt/hadoop/users/mhadley/TTTT/LJMet94X_1lepTT_032719_step2/'+shift+'/'
+outputDir = '/mnt/hadoop/users/mhadley/TTTT/LJMet94X_1lep_040319_step2/'+shift+'/'
 
 runDir=os.getcwd()
 gROOT.ProcessLine('.x compileStep2.C')

@@ -62,10 +62,10 @@ public :
    vector<double>  *theJetEta_JetSubCalc_PtOrdered;
    vector<double>  *theJetPhi_JetSubCalc_PtOrdered;
    vector<double>  *theJetEnergy_JetSubCalc_PtOrdered;
-   vector<double>  *theJetCSVb_JetSubCalc_PtOrdered;
-   vector<double>  *theJetCSVbb_JetSubCalc_PtOrdered;
-   vector<double>  *theJetCSVc_JetSubCalc_PtOrdered;
-   vector<double>  *theJetCSVudsg_JetSubCalc_PtOrdered;
+   vector<double>  *theJetDeepCSVb_JetSubCalc_PtOrdered;
+   vector<double>  *theJetDeepCSVbb_JetSubCalc_PtOrdered;
+   vector<double>  *theJetDeepCSVc_JetSubCalc_PtOrdered;
+   vector<double>  *theJetDeepCSVudsg_JetSubCalc_PtOrdered;
    vector<int>     *theJetHFlav_JetSubCalc_PtOrdered;
    vector<int>     *theJetPFlav_JetSubCalc_PtOrdered;
    vector<int>     *theJetBTag_JetSubCalc_PtOrdered;
@@ -190,6 +190,9 @@ public :
    Float_t         HTx;
    Float_t         Sphericity;
    Float_t         Aplanarity;
+   Float_t         secondJetPt;
+   Float_t         fifthJetPt;
+   Float_t         sixthJetPt;         
    Float_t         deltaR_lepbJetNotInMinMlb;
    Float_t         GD_DCSV_jetNotdijet;
    vector<double>  BD_DCSV_jetNotdijet;   
@@ -266,10 +269,10 @@ public :
    TBranch        *b_theJetEta_JetSubCalc_PtOrdered;   //!
    TBranch        *b_theJetPhi_JetSubCalc_PtOrdered;   //!
    TBranch        *b_theJetEnergy_JetSubCalc_PtOrdered;   //!
-   TBranch        *b_theJetCSVb_JetSubCalc_PtOrdered;   //!
-   TBranch        *b_theJetCSVbb_JetSubCalc_PtOrdered;   //!
-   TBranch        *b_theJetCSVc_JetSubCalc_PtOrdered;   //!
-   TBranch        *b_theJetCSVudsg_JetSubCalc_PtOrdered;   //!
+   TBranch        *b_theJetDeepCSVb_JetSubCalc_PtOrdered;   //!
+   TBranch        *b_theJetDeepCSVbb_JetSubCalc_PtOrdered;   //!
+   TBranch        *b_theJetDeepCSVc_JetSubCalc_PtOrdered;   //!
+   TBranch        *b_theJetDeepCSVudsg_JetSubCalc_PtOrdered;   //!
    TBranch        *b_theJetHFlav_JetSubCalc_PtOrdered;   //!
    TBranch        *b_theJetPFlav_JetSubCalc_PtOrdered;   //!
    TBranch        *b_theJetBTag_JetSubCalc_PtOrdered;   //!
@@ -359,27 +362,27 @@ step2::step2(TString inputFileName, TString outputFileName)// : inputTree(0), in
    // TT bkg divided into TTToSemiLep, TTToHadronic, TT high mass appear below
 
    //TTToSemiLep
-   if (inputFileName.Contains("TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt0to700")) xsecEff = 0.124965227182;
-   else if (inputFileName.Contains("TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf")) xsecEff = 0.0390353547886;
-   else if (inputFileName.Contains("TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000")) xsecEff = 0.0489916774424;
+   if (inputFileName.Contains("TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt0to700")) xsecEff = 0.137784841012;
+   else if (inputFileName.Contains("TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf")) xsecEff = 0.0309363357165;
+   else if (inputFileName.Contains("TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000")) xsecEff = 0.0514566653858;
    
    //TTToHadronic
-   else if (inputFileName.Contains("TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt0to700")) xsecEff = 0.116142042796;
-   else if (inputFileName.Contains("TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf")) xsecEff = 0.038130503147;
-   else if (inputFileName.Contains("TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000")) xsecEff = 0.0475747565755;
+   else if (inputFileName.Contains("TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt0to700")) xsecEff =  0.121490806141;
+   else if (inputFileName.Contains("TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf")) xsecEff = 0.030031985381;
+   else if (inputFileName.Contains("TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000")) xsecEff = 0.0490022856079;
    
    //TTTo2l2nu
-   else if (inputFileName.Contains("TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt0to700")) xsecEff = 0.0405145175674;
-   else if (inputFileName.Contains("TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf")) xsecEff = 0.023641731379;
-   else if (inputFileName.Contains("TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000")) xsecEff = 0.0269600535667;
+   else if (inputFileName.Contains("TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt0to700")) xsecEff = 0.0525799344238;
+   else if (inputFileName.Contains("TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf")) xsecEff = 0.0226832371713;
+   else if (inputFileName.Contains("TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000")) xsecEff = 0.0320566270444;
    
    //TT high mass 
-   else if (inputFileName.Contains("TT_Mtt-1000toInf_TuneCP5_13TeV-powheg-pythia8")) xsecEff = 0.0375769188266;
-   else if (inputFileName.Contains("TT_Mtt-700to1000_TuneCP5_13TeV-powheg-pythia8")) xsecEff = 0.0467160733391;
+   else if (inputFileName.Contains("TT_Mtt-1000toInf_TuneCP5_PSweights_13TeV-powheg-pythia8")) xsecEff = 0.0294081434678;
+   else if (inputFileName.Contains("TT_Mtt-700to1000_TuneCP5_13TeV-powheg-pythia8")) xsecEff = 0.0473629131251;
    
    //TTTT signal below
    
-   else if (inputFileName.Contains("TTTT_TuneCP5_13TeV-amcatnlo-pythia8")) xsecEff = 0.041298;
+   else if (inputFileName.Contains("TTTT_TuneCP5_PSweights_13TeV-amcatnlo-pythia8")) xsecEff = 0.0485879401951;
    
    //For everything else, just have this branch be dummy at the moment, 1 will do nothing
    else xsecEff = 1.0;
@@ -444,10 +447,10 @@ void step2::Init(TTree *tree)
    theJetEta_JetSubCalc_PtOrdered = 0;
    theJetPhi_JetSubCalc_PtOrdered = 0;
    theJetEnergy_JetSubCalc_PtOrdered = 0;
-   theJetCSVb_JetSubCalc_PtOrdered = 0;
-   theJetCSVbb_JetSubCalc_PtOrdered = 0;
-   theJetCSVc_JetSubCalc_PtOrdered = 0;
-   theJetCSVudsg_JetSubCalc_PtOrdered = 0;
+   theJetDeepCSVb_JetSubCalc_PtOrdered = 0;
+   theJetDeepCSVbb_JetSubCalc_PtOrdered = 0;
+   theJetDeepCSVc_JetSubCalc_PtOrdered = 0;
+   theJetDeepCSVudsg_JetSubCalc_PtOrdered = 0;
    theJetHFlav_JetSubCalc_PtOrdered = 0;
    theJetPFlav_JetSubCalc_PtOrdered = 0;
    theJetBTag_JetSubCalc_PtOrdered = 0;
@@ -519,10 +522,10 @@ void step2::Init(TTree *tree)
    inputTree->SetBranchAddress("theJetEta_JetSubCalc_PtOrdered", &theJetEta_JetSubCalc_PtOrdered, &b_theJetEta_JetSubCalc_PtOrdered);
    inputTree->SetBranchAddress("theJetPhi_JetSubCalc_PtOrdered", &theJetPhi_JetSubCalc_PtOrdered, &b_theJetPhi_JetSubCalc_PtOrdered);
    inputTree->SetBranchAddress("theJetEnergy_JetSubCalc_PtOrdered", &theJetEnergy_JetSubCalc_PtOrdered, &b_theJetEnergy_JetSubCalc_PtOrdered);
-   inputTree->SetBranchAddress("theJetCSVb_JetSubCalc_PtOrdered", &theJetCSVb_JetSubCalc_PtOrdered, &b_theJetCSVb_JetSubCalc_PtOrdered);
-   inputTree->SetBranchAddress("theJetCSVbb_JetSubCalc_PtOrdered", &theJetCSVbb_JetSubCalc_PtOrdered, &b_theJetCSVbb_JetSubCalc_PtOrdered);
-   inputTree->SetBranchAddress("theJetCSVc_JetSubCalc_PtOrdered", &theJetCSVc_JetSubCalc_PtOrdered, &b_theJetCSVc_JetSubCalc_PtOrdered);
-   inputTree->SetBranchAddress("theJetCSVudsg_JetSubCalc_PtOrdered", &theJetCSVudsg_JetSubCalc_PtOrdered, &b_theJetCSVudsg_JetSubCalc_PtOrdered);
+   inputTree->SetBranchAddress("theJetDeepCSVb_JetSubCalc_PtOrdered", &theJetDeepCSVb_JetSubCalc_PtOrdered, &b_theJetDeepCSVb_JetSubCalc_PtOrdered);
+   inputTree->SetBranchAddress("theJetDeepCSVbb_JetSubCalc_PtOrdered", &theJetDeepCSVbb_JetSubCalc_PtOrdered, &b_theJetDeepCSVbb_JetSubCalc_PtOrdered);
+   inputTree->SetBranchAddress("theJetDeepCSVc_JetSubCalc_PtOrdered", &theJetDeepCSVc_JetSubCalc_PtOrdered, &b_theJetDeepCSVc_JetSubCalc_PtOrdered);
+   inputTree->SetBranchAddress("theJetDeepCSVudsg_JetSubCalc_PtOrdered", &theJetDeepCSVudsg_JetSubCalc_PtOrdered, &b_theJetDeepCSVudsg_JetSubCalc_PtOrdered);
    inputTree->SetBranchAddress("theJetHFlav_JetSubCalc_PtOrdered", &theJetHFlav_JetSubCalc_PtOrdered, &b_theJetHFlav_JetSubCalc_PtOrdered);
    inputTree->SetBranchAddress("theJetPFlav_JetSubCalc_PtOrdered", &theJetPFlav_JetSubCalc_PtOrdered, &b_theJetPFlav_JetSubCalc_PtOrdered);
    inputTree->SetBranchAddress("theJetBTag_JetSubCalc_PtOrdered", &theJetBTag_JetSubCalc_PtOrdered, &b_theJetBTag_JetSubCalc_PtOrdered);
