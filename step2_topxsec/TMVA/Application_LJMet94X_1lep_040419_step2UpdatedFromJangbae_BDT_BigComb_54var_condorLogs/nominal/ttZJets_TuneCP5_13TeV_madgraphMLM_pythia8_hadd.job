@@ -1,0 +1,13 @@
+universe = vanilla
+Executable = /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/step2_topxsec/TMVA/doCondorApplication.sh
+Should_Transfer_Files = YES
+WhenToTransferOutput = ON_EXIT
+request_memory = 3072
+Transfer_Input_Files = /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/step2_topxsec/TMVA/Application_LJMet94X_1lep_040419_step2UpdatedFromJangbae_BDT_BigComb_54var_condorLogs/nominal//TMVAClassificationApplication.C
+Output = ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8_hadd.out
+Error = ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8_hadd.err
+Log = ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8_hadd.log
+Notification = Never
+Arguments = /mnt/hadoop/users/mhadley/TTTT/LJMet94X_1lep_040419_step2UpdatedFromJangbae//nominal/ /isilon/hadoop/store/user/jblee/TTTT/LJMet94X_1lep_040419_step2UpdatedFromJangbae_BDT_BigComb_54var/nominal/ ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8_hadd.root BDT /user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/step2_topxsec/TMVA/Application_LJMet94X_1lep_040419_step2UpdatedFromJangbae_BDT_BigComb_54var_condorLogs/nominal/
+
+Queue 1
