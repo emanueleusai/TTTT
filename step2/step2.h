@@ -239,6 +239,9 @@ public :
    Float_t         HTx;
    Float_t         Sphericity;
    Float_t         Aplanarity;
+   Float_t         secondJetPt;
+   Float_t         fifthJetPt;
+   Float_t         sixthJetPt;     
    Float_t         deltaR_lepbJetNotInMinMlb;
    vector<double>  GD_DCSV_jetNotdijet;
    vector<double>  BD_DCSV_jetNotdijet;   

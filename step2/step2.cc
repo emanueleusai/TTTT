@@ -297,6 +297,11 @@ void step2::Loop()
    TBranch *b_secondcsvb_bb         = outputTree->Branch("secondcsvb_bb",&secondcsvb_bb,"secondcsvb_bb");        
    TBranch *b_thirdcsvb_bb          = outputTree->Branch("thirdcsvb_bb",&thirdcsvb_bb,"thirdcsvb_bb");        
    TBranch *b_fourthcsvb_bb         = outputTree->Branch("fourthcsvb_bb",&fourthcsvb_bb,"fourthcsvb_bb/F");
+
+   TBranch *b_secondJetPt           = outputTree->Branch("secondJetPt",&secondJetPt,"secondJetPt/F");        
+   TBranch *b_fifthJetPt            = outputTree->Branch("fifthJetPt",&fifthJetPt,"fifthJetPt/F");        
+   TBranch *b_sixthJetPt            = outputTree->Branch("sixthJetPt",&sixthJetPt,"sixthJetPt/F");
+
    TBranch *b_csvJet1               = outputTree->Branch("csvJet1",&csvJet1,"csvJet1/F");
    TBranch *b_csvJet2               = outputTree->Branch("csvJet2",&csvJet2,"csvJet2/F");
    TBranch *b_csvJet3               = outputTree->Branch("csvJet3",&csvJet3,"csvJet3/F");
@@ -518,6 +523,10 @@ void step2::Loop()
      invM_jet45 = -10;               
      invM_jet46 = -10;                    
      invM_jet56 = -10;                         
+     secondJetPt = -1;
+     fifthJetPt = -1;
+     sixthJetPt = -1;
+     
      float totalPtCSV = 0;
      double deltaPhifromMET_ = TVector2::Phi_mpi_pi(leptonPhi_singleLepCalc - corr_met_phi_singleLepCalc);
      deltaPhi_lepMET = deltaPhifromMET_;
@@ -559,7 +568,17 @@ void step2::Loop()
 		   totalPtCSV += theJetPt_JetSubCalc_PtOrdered->at(ijet);
 		   aveCSVpt += (theJetDeepCSVb_JetSubCalc_PtOrdered->at(ijet)+theJetDeepCSVbb_JetSubCalc_PtOrdered->at(ijet))*theJetPt_JetSubCalc_PtOrdered->at(ijet);
 		}
-		
+
+		if (ijet==1){
+            secondJetPt = theJetPt_JetSubCalc_PtOrdered->at(ijet);
+        }
+		if (ijet==6){        
+            fifthJetPt = theJetPt_JetSubCalc_PtOrdered->at(ijet);
+        }
+        if (ijet==7){
+            sixthJetPt = theJetPt_JetSubCalc_PtOrdered->at(ijet);
+        }
+        		
         TLorentzVector jetTmp, bjetTmp;   		
 		jetTmp.SetPtEtaPhiE(theJetPt_JetSubCalc_PtOrdered->at(ijet),theJetEta_JetSubCalc_PtOrdered->at(ijet),theJetPhi_JetSubCalc_PtOrdered->at(ijet),theJetEnergy_JetSubCalc_PtOrdered->at(ijet));	
         v_pair_jet_CSV.push_back(make_pair(jetTmp, theJetDeepCSVb_JetSubCalc_PtOrdered->at(ijet)+theJetDeepCSVbb_JetSubCalc_PtOrdered->at(ijet)));        
@@ -1149,7 +1168,6 @@ void step2::Loop()
 	  b_thirdcsvb_bb->Fill();
 	  b_fourthcsvb_bb->Fill();
 	  b_PtFifthJet->Fill();
-
       b_MHRE->Fill();
       b_HTx->Fill();
 	  b_mass_lepJets0->Fill();
@@ -1188,7 +1206,6 @@ void step2::Loop()
       b_csvJet2->Fill();
       b_csvJet3->Fill();
       b_csvJet4->Fill();      
-     
 	  b_GD_pTrat->Fill();
 	  b_BD_pTrat->Fill();	  
       b_GD_DR_Tridijet->Fill();
@@ -1206,7 +1223,6 @@ void step2::Loop()
 	  b_deltaPhi_lepJetInMinMljet->Fill();	  
 	  b_deltaR_lepbJetInMinMlb->Fill();
 	  b_deltaPhi_lepbJetInMinMlb->Fill();	  
-
 	  b_HT_woBESTjet->Fill();	  
 	  b_MT_woBESTjet->Fill();	  
 	  b_PT_woBESTjet->Fill();	  
@@ -1215,7 +1231,6 @@ void step2::Loop()
 	  b_ratio_HTdHT4leadjets->Fill();
 	  b_W_PtdM->Fill();	 
 	  b_pTjet5_6->Fill(); 
-
       b_mean_csv->Fill();
 	  b_invM_jet34->Fill(); 
 	  b_invM_jet35->Fill(); 
@@ -1223,7 +1238,6 @@ void step2::Loop()
 	  b_invM_jet45->Fill(); 
 	  b_invM_jet46->Fill(); 
 	  b_invM_jet56->Fill(); 
-
       b_Sphericity->Fill(); 
       b_Aplanarity->Fill(); 
       b_pT_3rdcsvJet->Fill(); //added 31 March 2019
@@ -1235,7 +1249,10 @@ void step2::Loop()
       b_nGD_trijet->Fill();
       b_is_genMissingDaughter->Fill();
       b_is_genFourTopsOnelepton->Fill();      
-
+      b_secondJetPt->Fill(); 
+      b_fifthJetPt->Fill(); 
+      b_sixthJetPt->Fill(); 
+      
      if (ientry > 50000) break;     		  
    }
 
