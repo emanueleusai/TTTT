@@ -6,8 +6,7 @@ infilename=${1}
 outfilename=${2}
 inputDir=${3}
 outputDir=${4}
-minid=${5}
-maxid=${6}
+idlist=${5}
 
 scratch=${PWD}
 macroDir=${PWD}
@@ -17,13 +16,14 @@ cd CMSSW_9_4_6_patch1
 eval `scramv1 runtime -sh`
 cd -
 
+
 export PATH=$PATH:$macroDir
 
 XRDpath=root://cmseos.fnal.gov/$inputDir
 #root -l -b -q makeStep1.C\(\"$macroDir\",\"$XRDpath/$infilename\",\"$outfilename\"\)
 
-for iFile in $(seq $minid $maxid); do
-    echo $iFile
+for iFile in $idlist; do
+    echo "creating ${outfilename}_${iFile}.root"
     root -l -b -q makeStep1.C\(\"$macroDir\",\"$XRDpath/${infilename}_${iFile}.root\",\"${outfilename}_${iFile}.root\"\)
 done
 
