@@ -1,0 +1,48 @@
+
+Processing /home/eusai/4t/TTTT/TMVA/Application_FWLJMET102X_1lep2017_Oct2019_4t_02182020_step3_61var_condorLogs/nominal//TMVAClassificationApplication.C("BDT","/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02052020_step2/nominal//TTZZ_TuneCP5_13TeV-madgraph-pythia8_hadd.root","TTZZ_TuneCP5_13TeV-madgraph-pythia8_hadd.root")...
+
+==> Start TMVAClassificationApplication
+                         : Booking "BDT method" of type "BDT" from /home/eusai/4t/TTTT/TMVA/dataset2020Feb10/weights/BDT_BigComb_61vars_mDepth2/TMVAClassification_BDT.weights.xml.
+<HEADER> DataSetInfo              : [Default] : Added class "Signal"
+<HEADER> DataSetInfo              : [Default] : Added class "Background"
+                         : Booked classifier "BDT" of type: "BDT"
+--- TMVAClassificationApp    : Using input file: /mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02052020_step2/nominal//TTZZ_TuneCP5_13TeV-madgraph-pythia8_hadd.root
+--- Select signal sample
+--- Processing: 32024 events
+--- ... Processing event: 0
+--- ... Processing event: 1000
+--- ... Processing event: 2000
+--- ... Processing event: 3000
+--- ... Processing event: 4000
+--- ... Processing event: 5000
+--- ... Processing event: 6000
+--- ... Processing event: 7000
+--- ... Processing event: 8000
+--- ... Processing event: 9000
+--- ... Processing event: 10000
+--- ... Processing event: 11000
+--- ... Processing event: 12000
+--- ... Processing event: 13000
+--- ... Processing event: 14000
+--- ... Processing event: 15000
+--- ... Processing event: 16000
+--- ... Processing event: 17000
+--- ... Processing event: 18000
+--- ... Processing event: 19000
+--- ... Processing event: 20000
+--- ... Processing event: 21000
+--- ... Processing event: 22000
+--- ... Processing event: 23000
+--- ... Processing event: 24000
+--- ... Processing event: 25000
+--- ... Processing event: 26000
+--- ... Processing event: 27000
+--- ... Processing event: 28000
+--- ... Processing event: 29000
+--- ... Processing event: 30000
+--- ... Processing event: 31000
+--- ... Processing event: 32000
+--- End of event loop: Real time 0:00:15, CP time 10.770
+--- Created root file: "TMVApp.root" containing the MVA output histograms
+==> TMVAClassificationApplication is done!
+

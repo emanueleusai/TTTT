@@ -1,0 +1,13 @@
+universe = vanilla
+Executable = /home/eusai/4t/TTTT/TMVA/doCondorApplication.sh
+Should_Transfer_Files = YES
+WhenToTransferOutput = ON_EXIT
+request_memory = 3072
+Transfer_Input_Files = /home/eusai/4t/TTTT/TMVA/Application_FWLJMET102X_1lep2017_Oct2019_4t_02182020_step3_61var_condorLogs/nominal//TMVAClassificationApplication.C
+Output = WW_TuneCP5_13TeV-pythia8_hadd.out
+Error = WW_TuneCP5_13TeV-pythia8_hadd.err
+Log = WW_TuneCP5_13TeV-pythia8_hadd.log
+Notification = Never
+Arguments = /mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02052020_step2/nominal/ /mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02182020_step3_61var/nominal/ WW_TuneCP5_13TeV-pythia8_hadd.root BDT /home/eusai/4t/TTTT/TMVA/Application_FWLJMET102X_1lep2017_Oct2019_4t_02182020_step3_61var_condorLogs/nominal/
+
+Queue 1

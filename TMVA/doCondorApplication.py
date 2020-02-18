@@ -37,10 +37,22 @@ def makeTMVAClassAppConf(thefile):
 			if line.startswith('input ='): fout.write('input = \''+rFile+'\'')
 			if 'Float_t var<number>' in line:
 				for i, var in enumerate(varList): 
-					fout.write('   Float_t var'+str(i+1)+';\n')
+					if var[0]=='corr_met_MultiLepCalc':
+						fout.write('   Float_t varF'+str(i+1)+';\n')
+						fout.write('   Double_t varD'+str(i+1)+';\n')
+					elif var[0] in ['NJets_JetSubCalc','NresolvedTops1pFake','NJetsTtagged','NJetsWtagged','NJetsCSVwithSF_JetSubCalc']:
+						fout.write('   Float_t varF'+str(i+1)+';\n')
+						fout.write('   Int_t varI'+str(i+1)+';\n')
+					else:
+						fout.write('   Float_t var'+str(i+1)+';\n')
 			elif 'AddVariable' in line:
-				for i, var in enumerate(varList): 
-					fout.write('   reader->AddVariable( \"'+var[0]+'\", &var'+str(i+1)+' );\n')
+				for i, var in enumerate(varList):
+					if var[0]=='corr_met_MultiLepCalc': 
+						fout.write('   reader->AddVariable( \"'+var[0]+'\", &varF'+str(i+1)+' );\n')
+					elif var[0] in ['NJets_JetSubCalc','NresolvedTops1pFake','NJetsTtagged','NJetsWtagged','NJetsCSVwithSF_JetSubCalc']:
+						fout.write('   reader->AddVariable( \"'+var[0]+'\", &varF'+str(i+1)+' );\n')
+					else:
+						fout.write('   reader->AddVariable( \"'+var[0]+'\", &var'+str(i+1)+' );\n')
 			elif 'BookMVA' in line:
 # 				for mass in massList: 
 				fout.write('   reader->BookMVA( \"BDT method\", \"'+weightFile+'\" );\n')
@@ -50,9 +62,20 @@ def makeTMVAClassAppConf(thefile):
 				fout.write('   TBranch *b_BDT = newTree->Branch( \"BDT\", &BDT, \"BDT/F\" );\n')
 			elif 'SetBranchAddress' in line:
 				for i, var in enumerate(varList): 
-					fout.write('   theTree->SetBranchAddress( \"'+var[0]+'\", &var'+str(i+1)+' );\n')
+					if var[0]=='corr_met_MultiLepCalc': 
+						fout.write('   theTree->SetBranchAddress( \"'+var[0]+'\", &varD'+str(i+1)+' );\n')
+					elif var[0] in ['NJets_JetSubCalc','NresolvedTops1pFake','NJetsTtagged','NJetsWtagged','NJetsCSVwithSF_JetSubCalc']:
+						fout.write('   theTree->SetBranchAddress( \"'+var[0]+'\", &varI'+str(i+1)+' );\n')
+					else:
+						fout.write('   theTree->SetBranchAddress( \"'+var[0]+'\", &var'+str(i+1)+' );\n')
 			elif 'BDT<mass> = reader->EvaluateMVA' in line:
 # 				for mass in massList: 
+				for i, var in enumerate(varList):
+					if var[0]=='corr_met_MultiLepCalc': 
+						fout.write('      varF'+str(i+1)+'=(Float_t)varD'+str(i+1)+';\n')
+					elif var[0] in ['NJets_JetSubCalc','NresolvedTops1pFake','NJetsTtagged','NJetsWtagged','NJetsCSVwithSF_JetSubCalc']:
+						fout.write('      varF'+str(i+1)+'=(Float_t)varI'+str(i+1)+';\n')
+
 				fout.write('      BDT = reader->EvaluateMVA( \"BDT method\" );\n')
 			else: fout.write(line)
 makeTMVAClassAppConf(condorDir+'/TMVAClassificationApplication.C')
@@ -63,7 +86,7 @@ os.system('mkdir -p '+outputDir)
 count=0
 for file in rootfiles:
     if '.root' not in file: continue
-    # if 'QCD_HT300to500_TuneCP5' not in file: continue
+    # if 'TTTT' not in file: continue
     rawname = file[:-6]
     print file
     count+=1
@@ -87,7 +110,8 @@ Arguments = %(INPUTDIR)s %(OUTPUTDIR)s %(FILENAME)s.root %(BDT)s %(CONDORDIR)s
 Queue 1"""%dict)
     jdf.close()
     os.chdir('%s/'%(condorDir))
-    # os.system('condor_submit %(FILENAME)s.job'%dict)
+    print 'condor_submit %(FILENAME)s.job'%dict
+    os.system('condor_submit %(FILENAME)s.job'%dict)
     os.system('sleep 0.5')                                
     os.chdir('%s'%(runDir))
     print count, "jobs submitted!!!"
