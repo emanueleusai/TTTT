@@ -9,16 +9,16 @@ varListKey = 'BigComb'
 templateFile = '/home/eusai/4t/TTTT/TMVA/TMVAClassificationApplication_template.C'
 # massList = ['Low1','Low2']
 #weightFile = '/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/TMVA/dataset/weights/'
-weightFile = '/home/eusai/4t/TTTT/TMVA/dataset2020Feb10/weights/'
+weightFile = '/home/eusai/4t/TTTT/TMVA/dataset2020Feb13/weights/'
 weightFile+= BDT+'_BigComb_61vars_mDepth2/TMVAClassification_'+BDT+'.weights.xml'
 
 #IO directories must be full paths
 #relbase   = '/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/'
 relbase = '/home/eusai/4t/CMSSW_10_2_16_UL/'
 
-inputDir  = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02052020_step2'
+inputDir  = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02132020_step2'
 #outputDir = '/isilon/hadoop/store/user/jblee/TTTT/LJMet94X_1lepTT_022719_step2_saraBDay_'+BDT+'_BigComb_3var/'+shift+'/'
-outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02182020_step3_61var/'+shift+'/'
+outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02192020_step3_61var/'+shift+'/'
 # outputDir = '/isilon/hadoop/store/user/mhadley/LJMet94X_1lepTT_022719_step2_saraBDay_'+BDT+'_BigComb_3var/'+shift+'/'
 
 

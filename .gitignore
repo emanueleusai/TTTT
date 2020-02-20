@@ -1,1 +1,8 @@
 *.root
+*.log
+*.out
+*.err
+*.job
+*.eps
+*.png
+*.pyc

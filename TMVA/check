@@ -1,0 +1,5 @@
+ ls -lh /mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02192020_step3_61var/nominal/ | wc -l
+ ls -lh /mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02192020_step3_61var/JECup/ | wc -l
+ ls -lh /mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02192020_step3_61var/JECdown/ | wc -l
+ ls -lh /mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02192020_step3_61var/JERup/ | wc -l
+ ls -lh /mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02192020_step3_61var/JERdown/ | wc -l
