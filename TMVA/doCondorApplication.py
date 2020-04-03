@@ -4,23 +4,55 @@ import varsList
 shift = sys.argv[1]
 BDT = 'BDT'
 
-varListKey = 'BigComb'
+# varListKey = 'BigComb'
+
+# varListKey = 'Comb61andtrij'
+varListKey = 'CombIpRank'
+
+
+
 #templateFile = '/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/TMVA/TMVAClassificationApplication_template.C'
 templateFile = '/home/eusai/4t/TTTT/TMVA/TMVAClassificationApplication_template.C'
 # massList = ['Low1','Low2']
 #weightFile = '/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/TMVA/dataset/weights/'
-weightFile = '/home/eusai/4t/TTTT/TMVA/dataset2020Feb13/weights/'
-weightFile+= BDT+'_BigComb_61vars_mDepth2/TMVAClassification_'+BDT+'.weights.xml'
+weightFile = '/home/eusai/4t/TTTT/TMVA/dataset2020/weights/'
+# weightFile+= BDT+'_BigComb_61vars_mDepth2/TMVAClassification_'+BDT+'.weights.xml'
+
+# weightFile+= BDT+'_Comb61andtrij_73vars_mDepth2_4j_year2017/TMVAClassification_'+BDT+'.weights.xml'
+# weightFile+= BDT+'_Comb61andtrij_73vars_mDepth2_6j_year2017/TMVAClassification_'+BDT+'.weights.xml'
+# weightFile+= BDT+'_CombIpRank_61vars_mDepth2_4j_year2017/TMVAClassification_'+BDT+'.weights.xml'
+# weightFile+= BDT+'_CombIpRank_61vars_mDepth2_6j_year2017/TMVAClassification_'+BDT+'.weights.xml'
+
+# weightFile+= BDT+'_Comb61andtrij_73vars_mDepth2_6j_year2018/TMVAClassification_'+BDT+'.weights.xml'
+weightFile+= BDT+'_CombIpRank_61vars_mDepth2_6j_year2018/TMVAClassification_'+BDT+'.weights.xml'
 
 #IO directories must be full paths
-#relbase   = '/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/'
+
 relbase = '/home/eusai/4t/CMSSW_10_2_16_UL/'
 
-inputDir  = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02132020_step2'
-#outputDir = '/isilon/hadoop/store/user/jblee/TTTT/LJMet94X_1lepTT_022719_step2_saraBDay_'+BDT+'_BigComb_3var/'+shift+'/'
-outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02192020_step3_61var/'+shift+'/'
-# outputDir = '/isilon/hadoop/store/user/mhadley/LJMet94X_1lepTT_022719_step2_saraBDay_'+BDT+'_BigComb_3var/'+shift+'/'
+# inputDir  = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02132020_step2'
 
+# inputDir  = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_03032020_step2'
+inputDir  = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2018_Oct2019_4t_03032020_step2'
+
+
+# outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02192020_step3_61var/'+shift+'/'
+
+# outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_03192020_step3_73vars_4j/'+shift+'/'
+# outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_03192020_step3_73vars_6j/'+shift+'/'
+# outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_03192020_step3_61vars_4j/'+shift+'/'
+# outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_03192020_step3_61vars_6j/'+shift+'/'
+
+# BDT_Comb61andtrij_73vars_mDepth2_4j_year2017
+# BDT_Comb61andtrij_73vars_mDepth2_6j_year2017
+# BDT_CombIpRank_61vars_mDepth2_4j_year2017
+# BDT_CombIpRank_61vars_mDepth2_6j_year2017
+
+# outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2018_Oct2019_4t_03192020_step3_73vars_6j/'+shift+'/'
+outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2018_Oct2019_4t_03192020_step3_61vars_6j/'+shift+'/'
+
+# BDT_Comb61andtrij_73vars_mDepth2_6j_year2018
+# BDT_CombIpRank_61vars_mDepth2_6j_year2018
 
 inputDir += '/'+shift+'/'
 runDir=os.getcwd()
@@ -112,7 +144,7 @@ Queue 1"""%dict)
     os.chdir('%s/'%(condorDir))
     print 'condor_submit %(FILENAME)s.job'%dict
     os.system('condor_submit %(FILENAME)s.job'%dict)
-    os.system('sleep 0.5')                                
+    os.system('sleep 2')                                
     os.chdir('%s'%(runDir))
     print count, "jobs submitted!!!"
 
