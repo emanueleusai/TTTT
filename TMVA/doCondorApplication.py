@@ -1,55 +1,34 @@
 import os,sys
 import varsList
 
+# nominal 2017 73 4
+
 shift = sys.argv[1]
+
 BDT = 'BDT'
+year = sys.argv[2]
+njet = sys.argv[4]
+nvar = sys.argv[3]
 
-# varListKey = 'BigComb'
+if nvar == '73':
+	varListKey = 'SepRank6j73vars2017year'
+else:
+	varListKey = 'SepRank6j73vars2017year'+nvar+'top'
 
-# varListKey = 'Comb61andtrij'
-varListKey = 'CombIpRank'
 
-
-
-#templateFile = '/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/TMVA/TMVAClassificationApplication_template.C'
 templateFile = '/home/eusai/4t/TTTT/TMVA/TMVAClassificationApplication_template.C'
-# massList = ['Low1','Low2']
-#weightFile = '/user_data/jlee/TTTT/CMSSW_9_4_6_patch1/src/TMVA/dataset/weights/'
 weightFile = '/home/eusai/4t/TTTT/TMVA/dataset2020/weights/'
-# weightFile+= BDT+'_BigComb_61vars_mDepth2/TMVAClassification_'+BDT+'.weights.xml'
 
-# weightFile+= BDT+'_Comb61andtrij_73vars_mDepth2_4j_year2017/TMVAClassification_'+BDT+'.weights.xml'
-# weightFile+= BDT+'_Comb61andtrij_73vars_mDepth2_6j_year2017/TMVAClassification_'+BDT+'.weights.xml'
-# weightFile+= BDT+'_CombIpRank_61vars_mDepth2_4j_year2017/TMVAClassification_'+BDT+'.weights.xml'
-# weightFile+= BDT+'_CombIpRank_61vars_mDepth2_6j_year2017/TMVAClassification_'+BDT+'.weights.xml'
+# BDT_SepRank6j73vars2017year50top_50vars_mDepth2_6j_year2018
+# BDT_SepRank6j73vars2017year_73vars_mDepth2_4j_year2017
 
-# weightFile+= BDT+'_Comb61andtrij_73vars_mDepth2_6j_year2018/TMVAClassification_'+BDT+'.weights.xml'
-weightFile+= BDT+'_CombIpRank_61vars_mDepth2_6j_year2018/TMVAClassification_'+BDT+'.weights.xml'
+weightFile+= BDT+'_'+varListKey+'_'+nvar+'vars_mDepth2_'+njet+'j_year'+year+'/TMVAClassification_'+BDT+'.weights.xml'
 
-#IO directories must be full paths
+inputDir  = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep'+year+'_Oct2019_4t_10072020_step2'
+
+outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep'+year+'_Oct2019_4t_11072020_step3_'+nvar+'vars_'+njet+'j/'+shift+'/'
 
 relbase = '/home/eusai/4t/CMSSW_10_2_16_UL/'
-
-# inputDir  = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02132020_step2'
-
-# inputDir  = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_03032020_step2'
-inputDir  = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2018_Oct2019_4t_03032020_step2'
-
-
-# outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_02192020_step3_61var/'+shift+'/'
-
-# outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_03192020_step3_73vars_4j/'+shift+'/'
-# outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_03192020_step3_73vars_6j/'+shift+'/'
-# outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_03192020_step3_61vars_4j/'+shift+'/'
-# outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2017_Oct2019_4t_03192020_step3_61vars_6j/'+shift+'/'
-
-# BDT_Comb61andtrij_73vars_mDepth2_4j_year2017
-# BDT_Comb61andtrij_73vars_mDepth2_6j_year2017
-# BDT_CombIpRank_61vars_mDepth2_4j_year2017
-# BDT_CombIpRank_61vars_mDepth2_6j_year2017
-
-# outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2018_Oct2019_4t_03192020_step3_73vars_6j/'+shift+'/'
-outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep2018_Oct2019_4t_03192020_step3_61vars_6j/'+shift+'/'
 
 # BDT_Comb61andtrij_73vars_mDepth2_6j_year2018
 # BDT_CombIpRank_61vars_mDepth2_6j_year2018
