@@ -9,6 +9,7 @@ BDT = 'BDT'
 year = sys.argv[2]
 njet = sys.argv[4]
 nvar = sys.argv[3]
+pfx = sys.argv[5]
 
 if nvar == '73':
 	varListKey = 'SepRank6j73vars2017year'
@@ -17,16 +18,16 @@ else:
 
 
 templateFile = '/home/eusai/4t/TTTT/TMVA/TMVAClassificationApplication_template.C'
-weightFile = '/home/eusai/4t/TTTT/TMVA/dataset2020/weights/'
+weightFile = '/home/eusai/4t/TTTT/TMVA/dataset2021/weights/'
 
 # BDT_SepRank6j73vars2017year50top_50vars_mDepth2_6j_year2018
 # BDT_SepRank6j73vars2017year_73vars_mDepth2_4j_year2017
 
-weightFile+= BDT+'_'+varListKey+'_'+nvar+'vars_mDepth2_'+njet+'j_year'+year+'/TMVAClassification_'+BDT+'.weights.xml'
+weightFile+= BDT+'_'+varListKey+'_'+nvar+'vars_mDepth2_'+njet+'j_year'+year+pfx+'/TMVAClassification_'+BDT+'.weights.xml'
 
 inputDir  = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep'+year+'_Oct2019_4t_10072020_step2'
 
-outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep'+year+'_Oct2019_4t_11072020_step3_'+nvar+'vars_'+njet+'j/'+shift+'/'
+outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep'+year+'_Oct2019_4t_11072020_step3_'+nvar+'vars_'+njet+'j'+pfx+'/'+shift+'/'
 
 relbase = '/home/eusai/4t/CMSSW_10_2_16_UL/'
 
@@ -44,6 +45,7 @@ templateFileLines = f.readlines()
 f.close()
 def makeTMVAClassAppConf(thefile):
 	with open(thefile,'w') as fout:
+		vars_to_convert = ['NJets_JetSubCalc','NresolvedTops1pFake','NJetsTtagged','NJetsWtagged','NJetsCSVwithSF_JetSubCalc','NJetsCSV_MultiLepCalc','NJetsCSVwithSF_MultiLepCalc']
 		for line in templateFileLines:
 			if line.startswith('input ='): fout.write('input = \''+rFile+'\'')
 			if 'Float_t var<number>' in line:
@@ -51,7 +53,7 @@ def makeTMVAClassAppConf(thefile):
 					if var[0]=='corr_met_MultiLepCalc':
 						fout.write('   Float_t varF'+str(i+1)+';\n')
 						fout.write('   Double_t varD'+str(i+1)+';\n')
-					elif var[0] in ['NJets_JetSubCalc','NresolvedTops1pFake','NJetsTtagged','NJetsWtagged','NJetsCSVwithSF_JetSubCalc']:
+					elif var[0] in vars_to_convert:
 						fout.write('   Float_t varF'+str(i+1)+';\n')
 						fout.write('   Int_t varI'+str(i+1)+';\n')
 					else:
@@ -60,7 +62,7 @@ def makeTMVAClassAppConf(thefile):
 				for i, var in enumerate(varList):
 					if var[0]=='corr_met_MultiLepCalc': 
 						fout.write('   reader->AddVariable( \"'+var[0]+'\", &varF'+str(i+1)+' );\n')
-					elif var[0] in ['NJets_JetSubCalc','NresolvedTops1pFake','NJetsTtagged','NJetsWtagged','NJetsCSVwithSF_JetSubCalc']:
+					elif var[0] in vars_to_convert:
 						fout.write('   reader->AddVariable( \"'+var[0]+'\", &varF'+str(i+1)+' );\n')
 					else:
 						fout.write('   reader->AddVariable( \"'+var[0]+'\", &var'+str(i+1)+' );\n')
@@ -75,7 +77,7 @@ def makeTMVAClassAppConf(thefile):
 				for i, var in enumerate(varList): 
 					if var[0]=='corr_met_MultiLepCalc': 
 						fout.write('   theTree->SetBranchAddress( \"'+var[0]+'\", &varD'+str(i+1)+' );\n')
-					elif var[0] in ['NJets_JetSubCalc','NresolvedTops1pFake','NJetsTtagged','NJetsWtagged','NJetsCSVwithSF_JetSubCalc']:
+					elif var[0] in vars_to_convert:
 						fout.write('   theTree->SetBranchAddress( \"'+var[0]+'\", &varI'+str(i+1)+' );\n')
 					else:
 						fout.write('   theTree->SetBranchAddress( \"'+var[0]+'\", &var'+str(i+1)+' );\n')
@@ -84,7 +86,7 @@ def makeTMVAClassAppConf(thefile):
 				for i, var in enumerate(varList):
 					if var[0]=='corr_met_MultiLepCalc': 
 						fout.write('      varF'+str(i+1)+'=(Float_t)varD'+str(i+1)+';\n')
-					elif var[0] in ['NJets_JetSubCalc','NresolvedTops1pFake','NJetsTtagged','NJetsWtagged','NJetsCSVwithSF_JetSubCalc']:
+					elif var[0] in vars_to_convert:
 						fout.write('      varF'+str(i+1)+'=(Float_t)varI'+str(i+1)+';\n')
 
 				fout.write('      BDT = reader->EvaluateMVA( \"BDT method\" );\n')
