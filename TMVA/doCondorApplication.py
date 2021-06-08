@@ -12,22 +12,25 @@ nvar = sys.argv[3]
 pfx = sys.argv[5]
 
 if nvar == '73':
-	varListKey = 'SepRank6j73vars2017year'
+	varListKey = 'SepRank6j73vars2017Run'
 else:
-	varListKey = 'SepRank6j73vars2017year'+nvar+'top'
+	varListKey = 'SepRank6j73vars2017Run'+nvar+'top'
 
 
 templateFile = '/home/eusai/4t/TTTT/TMVA/TMVAClassificationApplication_template.C'
 weightFile = '/home/eusai/4t/TTTT/TMVA/dataset2021/weights/'
 
-# BDT_SepRank6j73vars2017year50top_50vars_mDepth2_6j_year2018
-# BDT_SepRank6j73vars2017year_73vars_mDepth2_4j_year2017
+# BDT_SepRank6j73vars2017year40top_40vars_mDepth2_6j_year2017_NJetsCSV_v1
 
 weightFile+= BDT+'_'+varListKey+'_'+nvar+'vars_mDepth2_'+njet+'j_year'+year+pfx+'/TMVAClassification_'+BDT+'.weights.xml'
 
-inputDir  = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep'+year+'_Oct2019_4t_10072020_step2'
+inputDir  = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep'+year+'_Oct2019_4t_051321_step2'
+if year == '2016':
+    inputDir  = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep'+year+'_Jan2021_4t_051321_step2'
 
-outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep'+year+'_Oct2019_4t_11072020_step3_'+nvar+'vars_'+njet+'j'+pfx+'/'+shift+'/'
+outputDir = '/mnt/hadoop/store/group/bruxljm/FWLJMET102X_1lep'+year+'_Oct2019_4t_053121_step3_'+nvar+'vars_'+njet+'j'+pfx+'/'+shift+'/'
+
+
 
 relbase = '/home/eusai/4t/CMSSW_10_2_16_UL/'
 
@@ -125,7 +128,7 @@ Queue 1"""%dict)
     os.chdir('%s/'%(condorDir))
     print 'condor_submit %(FILENAME)s.job'%dict
     os.system('condor_submit %(FILENAME)s.job'%dict)
-    os.system('sleep 2')                                
+    os.system('sleep 1')                                
     os.chdir('%s'%(runDir))
     print count, "jobs submitted!!!"
 
